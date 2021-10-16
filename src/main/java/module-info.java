@@ -5,6 +5,7 @@ module th.ac.chula.cafetps.cafetps {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
+    requires java.sql;
 
     opens th.ac.chula.cafetps to javafx.fxml;
     exports th.ac.chula.cafetps;
