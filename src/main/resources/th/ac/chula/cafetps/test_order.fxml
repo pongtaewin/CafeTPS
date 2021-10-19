@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F8F8F8;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.chula.cafetps.controller.HomeOrderController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0">
+         <top>
+            <Pane prefHeight="97.0" prefWidth="200.0" styleClass="custom-pane" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutX="83.0" prefHeight="96.0" prefWidth="698.0" spacing="10.0">
+                     <children>
+                        <Button graphicTextGap="16.0" maxHeight="97.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="173.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Home" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                        <Button graphicTextGap="16.0" mnemonicParsing="false" onAction="#switchToMonthlySum" opacity="0.65" prefHeight="96.0" prefWidth="262.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Monthly summary" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M19 2h-4.18C14.4.84 13.3 0 12 0S9.6.84 9.18 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 18H6c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1h1v1c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V4h1c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                        <Button graphicTextGap="16.0" layoutX="83.0" mnemonicParsing="false" onAction="#switchToMembership" opacity="0.65" prefHeight="97.0" prefWidth="214.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Membership" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label fx:id="memberName" layoutX="1250.0" layoutY="32.0" styleClass="member-name" text="ลูกค้า">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+               </children>
+            </Pane>
+         </top>
+         <right>
+            <ScrollPane hbarPolicy="NEVER" hmax="0.0" pannable="true" prefHeight="200.0" prefWidth="919.0" styleClass="menu-box" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox fillWidth="false" prefWidth="919.0" spacing="24.0" styleClass="menu-box">
+                     <children>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
+                           <children>
+                              <Label fx:id="name3" styleClass="label-category" text="Recent Order" />
+                              <GridPane fx:id="recentGrid">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
+                           <children>
+                              <Label fx:id="name" styleClass="label-category" text="Coffee" />
+                              <GridPane fx:id="coffeeGrid">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
+                           <children>
+                              <Label fx:id="name1" styleClass="label-category" text="Non-Coffee" />
+                              <GridPane fx:id="noncoffeeGrid">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
+                           <children>
+                              <Label fx:id="name2" styleClass="label-category" text="Bakery" />
+                              <GridPane fx:id="bakeryGrid">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="16.0" top="24.0" />
+                     </padding>
+                  </VBox>
+               </content>
+               <BorderPane.margin>
+                  <Insets right="24.0" top="55.0" />
+               </BorderPane.margin>
+            </ScrollPane>
+         </right>
+         <left>
+            <Pane prefHeight="872.0" prefWidth="455.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="receiptTable" maxWidth="455.0" minHeight="800.0" prefHeight="200.0" styleClass="choice-box" stylesheets="@stylesheet.css">
+                     <columns>
+                        <TableColumn fx:id="nameItemCol" minWidth="128.0" text="รายการ" />
+                        <TableColumn fx:id="sweetnessCol" minWidth="114.0" text="ความหวาน" />
+                        <TableColumn fx:id="quantityCol" minWidth="60.0" text="จำนวน" />
+                        <TableColumn fx:id="priceCol" minWidth="48.0" text="ราคา" />
+                        <TableColumn fx:id="editCol" minWidth="24.0" />
+                     </columns>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TableView>
+               </children>
+               <opaqueInsets>
+                  <Insets left="24.0" top="55.0" />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets left="16.0" top="55.0" />
+               </BorderPane.margin>
+            </Pane>
+         </left>
+      </BorderPane>
+      <AnchorPane layoutX="17.0" layoutY="858.0" prefHeight="57.0" prefWidth="453.0" styleClass="total" stylesheets="@stylesheet.css">
+         <children>
+            <Label layoutX="33.0" layoutY="8.0" text="ยอดรวม" />
+            <Label fx:id="totalPrice" layoutX="382.0" layoutY="8.0" text="0" />
+         </children>
+      </AnchorPane>
+      <Button layoutX="16.0" layoutY="915.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="455.0" styleClass="submit-button" onAction="#submitOrder" stylesheets="@stylesheet.css" text="ยืนยันรายการ" textFill="WHITE" />
+   </children>
+</AnchorPane>

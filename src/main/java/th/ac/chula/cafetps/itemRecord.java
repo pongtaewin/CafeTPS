@@ -46,4 +46,15 @@ public class itemRecord {
     public int getPricePerUnit() {
         return pricePerUnit;
     }
+
+    @Override
+    public String toString() {
+        return "itemRecord{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", category=" + category +
+                ", pricePerUnit=" + pricePerUnit +
+                '}';
+    }
 }

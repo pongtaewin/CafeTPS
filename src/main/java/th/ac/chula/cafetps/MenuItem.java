@@ -21,16 +21,15 @@ public class MenuItem {
                 if(!tempArrayCoffee.contains(temp.getName())){
                     coffeeMenu.add(new PickItem(temp.getName(),true));
                     tempArrayCoffee.add(temp.getName());
-                }else{
-                    coffeeMenu.get(tempArrayCoffee.indexOf(temp.getName())).addAvailableType(temp.getType());
+
                 }
+                coffeeMenu.get(tempArrayCoffee.indexOf(temp.getName())).addAvailableType(temp.getType());
             }else if(temp.getCategory()==itemCategory.NONCOFFEE){
-                if(!tempArrayNon.contains(temp.getName())){
-                    nonCoffeeMenu.add(new PickItem(temp.getName(),true));
+                if(!tempArrayNon.contains(temp.getName())) {
+                    nonCoffeeMenu.add(new PickItem(temp.getName(), true));
                     tempArrayNon.add(temp.getName());
-                }else{
-                    nonCoffeeMenu.get(tempArrayNon.indexOf(temp.getName())).addAvailableType(temp.getType());
                 }
+                nonCoffeeMenu.get(tempArrayNon.indexOf(temp.getName())).addAvailableType(temp.getType());
             }else if(temp.getCategory()==itemCategory.BAKERY){
                 bakeryMenu.add(new PickItem(temp.getName(), false));
             }
@@ -40,5 +39,21 @@ public class MenuItem {
     public MenuItem(Helper helper,Member member) {
         this(helper);
         recentOrder = helper.getLastOrder(member.getMemberID());
+    }
+
+    public ArrayList<Item> getRecentOrder() {
+        return recentOrder;
+    }
+
+    public ArrayList<PickItem> getCoffeeMenu() {
+        return coffeeMenu;
+    }
+
+    public ArrayList<PickItem> getNonCoffeeMenu() {
+        return nonCoffeeMenu;
+    }
+
+    public ArrayList<PickItem> getBakeryMenu() {
+        return bakeryMenu;
     }
 }

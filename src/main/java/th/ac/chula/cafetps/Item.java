@@ -12,6 +12,14 @@ public class Item {
         this.sweetness = sweetness;
     }
 
+    public Item(String name,itemType type,int quantity,String sweetness,int pricePerUnit) {
+        this.type = type;
+        this.quantity = quantity;
+        this.pricePerUnit = pricePerUnit;
+        this.sweetness = sweetness;
+        this.name = name;
+    }
+
     public itemType getType() {
         return type;
     }
@@ -21,7 +29,21 @@ public class Item {
     }
 
     public String getName() {
-        return name+sweetness;
+        String followType = "";
+        switch (type) {
+            case HOT:
+                 followType = "ร้อน";
+                 break;
+            case ICED:
+                followType = "เย็น";
+                break;
+            case FRAPPE:
+                followType = "ปั่น";
+                break;
+            case NONE:
+                break;
+        }
+        return name+followType;
     }
 
     public String getSweetness() {

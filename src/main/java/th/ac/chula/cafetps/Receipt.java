@@ -7,38 +7,26 @@ import java.util.*;
 
 public class Receipt {
 
-    private Helper helper;
-    private ObservableList<Item> records;
-    private ArrayList<Item> list;
-
+    public ArrayList<Item> list;
 
     //maybe change
-    public Receipt(Helper helper) {
-        this.helper = helper;
+    public Receipt() {
         list = new ArrayList<>();
-        this.records = FXCollections.observableList(list);
     }
 
-    public void remove(int index){
-        records.remove(index);
-    }
-
-    private void clear() {
-        records.clear();
+    public void addItem(Item item,int pricePerUnit){
+        item.setPricePerUnit(pricePerUnit);
+        list.add(item);
     }
 
     public int totalPrice(Helper helper){
         int total = 0;
-        for(int i = 0 ;i < records.size();i++){
-            total += records.get(i).getQuantity()*records.get(i).getPricePerUnit();
+        for(int i = 0 ;i < list.size();i++){
+            total += list.get(i).getQuantity()*list.get(i).getPricePerUnit();
         }
         return total;
     }
 
-    public void addItem(Item item){
-        item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(),item.getType()));
-        records.add(item);
-    }
 
 
 

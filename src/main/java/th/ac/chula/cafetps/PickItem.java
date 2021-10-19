@@ -24,4 +24,24 @@ public class PickItem {
         availableType.add(type);
     }
 
+    public List<itemType> getAvailableType() {
+        return availableType;
+    }
+
+    public boolean isPickSweetness() {
+        return pickSweetness;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "PickItem{" +
+                "name='" + name + '\'' +
+                ", availableType=" + availableType +
+                ", pickSweetness=" + pickSweetness +
+                '}';
+    }
 }

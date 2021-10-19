@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 
 .root{
     -fx-font-family: 'Ubuntu';
@@ -7,6 +7,9 @@
 .custom-pane {
     -fx-background-radius: 0px 0px 20px 20px ;
     -fx-background-color: #526ED0;
+}
+.navbar-button:hover{
+    -fx-opacity: 1;
 }
 .navbar-button {
     -fx-font-family: 'Ubuntu';
@@ -21,7 +24,16 @@
     -fx-font-weight: 500;
 }
 .text-box{
-    -fx-font-family: 'Ubuntu';
+    -fx-font-family: 'Noto Sans Thai';
+    -fx-font-size: 16px;
+}
+.choice-box{
+    -fx-font-family: 'Noto Sans Thai';
+    -fx-font-size: 16px;
+}
+.alert-msg{
+    -fx-font-family: "Noto Sans Thai";
+    -fx-pref-width: 500;
     -fx-font-size: 16px;
 }
 .submit-button:hover{
@@ -32,4 +44,57 @@
     -fx-font-size: 24px;
     -fx-background-color: #526ED0;
     -fx-background-radius: 0px;
+    -fx-font-weight: 700;
+}
+.header-text{
+    -fx-font-family: 'Noto Sans Thai';
+    -fx-font-size: 28px;
+}
+.card{
+    -fx-font-family: 'Noto Sans Thai';
+    -fx-font-size: 18px;
+    -fx-background-color: #C4C4C4;
+}
+.card:hover{
+    -fx-background-color: #cbcbcb;
+}
+.menu-box{
+    -fx-background: #ffffff;
+    -fx-border-color: transparent;
+}
+.menu-box:focused{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.label-category{
+    -fx-font-family: 'Ubuntu';
+    -fx-font-weight: 700;
+    -fx-font-size: 24px;
+    -fx-text-fill: #A4A4A4;
+}
+.total{
+    -fx-font-family: 'Noto Sans Thai';
+    -fx-font-size: 18px;
+    -fx-background-color: #ffffff;
+}
+.member-name{
+    -fx-font-family: "Noto Sans Thai";
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+}
+.dialog-pane{
+    -fx-font-family: "Noto Sans Thai",'Ubuntu';
+    -fx-font-size: 20px;
+}
+.pay-box{
+    -fx-font-family: "Noto Sans Thai";
+}
+.numeric{
+    -fx-font-family: 'Ubuntu';
+    -fx-font-weight: 700;
+}
+.numeric-light{
+    -fx-font-family: 'Ubuntu';
+    -fx-font-weight: 500;
+    -fx-font-size: 20px;
 }
