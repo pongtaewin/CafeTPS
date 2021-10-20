@@ -98,3 +98,16 @@
     -fx-font-weight: 500;
     -fx-font-size: 20px;
 }
+.add-popup-button{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+}
+.add-popup-button:focused{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+}
+}

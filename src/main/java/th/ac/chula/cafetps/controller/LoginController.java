@@ -47,7 +47,7 @@ public class LoginController {
                 HomeController homeController = loader.getController();
                 homeController.setHelper(helper);
                 homeController.setEmployee(employee);
-                homeController.init();
+                homeController.setStage(getStage());
                 stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -58,5 +58,11 @@ public class LoginController {
 
     }
 
+    public Stage getStage() {
+        return stage;
+    }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }

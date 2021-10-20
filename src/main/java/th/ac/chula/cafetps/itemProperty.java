@@ -1,6 +1,6 @@
 package th.ac.chula.cafetps;
 
-public enum itemType {
+public enum itemProperty {
     HOT("ร้อน"),
     ICED("เย็น"),
     FRAPPE("ปั่น"),
@@ -8,7 +8,7 @@ public enum itemType {
 
     private String value;
 
-    itemType(String value){
+    itemProperty(String value){
         this.value = value;
     }
 

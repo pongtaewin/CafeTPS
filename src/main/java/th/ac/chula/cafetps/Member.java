@@ -39,6 +39,11 @@ public class Member {
         point = (double) Math.round(point*100.0)/100.0;
     }
 
+
+    public double getPointFromTotal(int total){
+        return  total*0.025;
+    }
+
     public void setPoint(double point) {
         this.point = point;
         convertPrecision();

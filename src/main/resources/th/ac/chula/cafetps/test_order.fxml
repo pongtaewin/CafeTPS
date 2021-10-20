@@ -52,7 +52,7 @@
                <content>
                   <VBox fillWidth="false" prefWidth="919.0" spacing="24.0" styleClass="menu-box">
                      <children>
-                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
+                        <VBox fx:id="recentBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
                            <children>
                               <Label fx:id="name3" styleClass="label-category" text="Recent Order" />
                               <GridPane fx:id="recentGrid">
@@ -134,6 +134,6 @@
             <Label fx:id="totalPrice" layoutX="382.0" layoutY="8.0" text="0" />
          </children>
       </AnchorPane>
-      <Button layoutX="16.0" layoutY="915.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="455.0" styleClass="submit-button" onAction="#submitOrder" stylesheets="@stylesheet.css" text="ยืนยันรายการ" textFill="WHITE" />
+      <Button layoutX="16.0" layoutY="915.0" mnemonicParsing="false" onAction="#submitOrder" prefHeight="108.0" prefWidth="455.0" styleClass="submit-button" stylesheets="@stylesheet.css" text="ยืนยันรายการ" textFill="WHITE" />
    </children>
 </AnchorPane>

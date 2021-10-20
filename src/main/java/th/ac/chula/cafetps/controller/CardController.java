@@ -9,7 +9,7 @@ public class CardController {
     @FXML
     private Label name;
 
-    private PickItem pickItem;
+    public PickItem pickItem;
 
     public void setData(PickItem pickItem){
         this.pickItem = pickItem;

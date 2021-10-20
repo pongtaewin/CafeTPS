@@ -52,23 +52,6 @@
             </HBox>
             <HBox prefHeight="38.0" prefWidth="113.0" spacing="110.0">
                <children>
-                  <Label prefWidth="90.0" styleClass="pay-box" text="ส่วนลด">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="discount" prefHeight="58.0" prefWidth="60.0" style="-fx-font-weight: 700" text="1000">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets left="33.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="38.0" prefWidth="113.0" spacing="110.0">
-               <children>
                   <Label prefWidth="90.0" styleClass="pay-box" text="ทอนเงิน">
                      <font>
                         <Font size="26.0" />

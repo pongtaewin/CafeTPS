@@ -13,20 +13,23 @@ public class PaySecondController {
     private Label total;
 
     @FXML
-    private Label discount;
-
-    @FXML
     private Label changeAmt;
 
     @FXML
     public Button submit;
 
     public void init(int gottenMoney,int total){
-        int discountAmt = (int)((double)total*0.10);
         this.gottenMoney.setText(gottenMoney+"");
         this.total.setText(total+"");
-        discount.setText(discountAmt+"");
-        changeAmt.setText((gottenMoney-total+discountAmt)+"");
+        changeAmt.setText((gottenMoney-total)+"");
+    }
+
+    public int getNetTotal(){
+        return Integer.parseInt(total.getText());
+    }
+
+    public double getPoint(){
+        return getNetTotal()*0.025;
     }
 
 

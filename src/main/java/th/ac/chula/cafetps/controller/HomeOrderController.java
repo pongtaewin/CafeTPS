@@ -4,16 +4,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -22,7 +23,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import th.ac.chula.cafetps.*;
 import th.ac.chula.cafetps.MenuItem;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class HomeOrderController extends SwitchController{
     private Label memberName;
 
     @FXML
-    private ScrollPane scrollPane;
+    private GridPane recentGrid;
 
     @FXML
     private GridPane coffeeGrid;
@@ -65,52 +65,23 @@ public class HomeOrderController extends SwitchController{
     @FXML
     private Label totalPrice;
 
+    @FXML
+    private VBox recentBox;
+
 
     private Member member;
+
 
     private ArrayList<PickItem> data;
 
     private ObservableList<Item> receiptShow;
-
-    private Receipt receipt;
 
     private static final String deletePath = "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z";
 
 
     @FXML
     public void initialize(){
-        receipt = new Receipt();
-        receiptShow = FXCollections.observableArrayList(
-                new Item("แงว",itemType.HOT,2,"นิดนุง",50)
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meowdsadsadasdasdsa",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50),
-//                new Item("meow",itemType.HOT,2,"นิดนุง",50)
-        );
+        receiptShow = FXCollections.observableArrayList();
 
         nameItemCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         sweetnessCol.setCellValueFactory(new PropertyValueFactory<>("sweetness"));
@@ -118,7 +89,6 @@ public class HomeOrderController extends SwitchController{
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         receiptTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
 
         //add cell of button edit
         Callback<TableColumn<Item, String>, TableCell<Item, String>> cellFactory = (TableColumn<Item, String> param) -> {
@@ -197,34 +167,78 @@ public class HomeOrderController extends SwitchController{
             }
         });
 
-
-
-        member = new Member();
-        member.setMemberName("อาธร");
-        //mock
         totalPrice.setText(getTotal()+"");
-
-        if(!member.getMemberName().equals("guest")){
-            memberName.setText("ลูกค้า คุณ"+member.getMemberName());
-        }
-        helper = new Helper();
-        init();
     }
 
     public void init(){
-        MenuItem temp = new MenuItem(helper);
-        data = temp.getCoffeeMenu();
+//        member = helper.memberCheck("0842053668");
+        MenuItem temp = new MenuItem(helper,member);
+        ArrayList<Item> recentOrder = temp.getRecentOrder();
         int column = 0;
         int row = 1;
+        if(member.getMemberID().equals("0")){
+            memberName.setText("ไม่ได้เป็นสมาชิก");
+            recentBox.setVisible(false);
+        }else{
+            memberName.setText("ลูกค้า คุณ"+member.getMemberName());
+            try {
+                for(int i = 0;i< 4;i++){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/recent_card.fxml"));
+                    AnchorPane pane = loader.load();
+                    RecentCardController recentCardController = loader.getController();
+                    if(i<recentOrder.size()){
+                        recentCardController.setData(recentOrder.get(i));
+                        recentGrid.add(pane, i, 1); //(child,column,row)
+                        pane.setOnMouseClicked((MouseEvent event) -> {
+                            Item item = recentCardController.item;
+                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(),item.getProperty()));
+                            addItem(recentCardController.item);
+                        });
+                    }
+                }
+                recentGrid.setHgap(16);
+                recentGrid.setPadding(new Insets(0,36,0,40));
+                recentGrid.setMaxWidth(160*recentGrid.getColumnCount());
+
+                column = 0;
+                row = 1;
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        data = temp.getCoffeeMenu();
         try {
             for (int i = 0; i < data.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/card.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
-//
                 CardController cardController = fxmlLoader.getController();
-//                must add listener to pop up
                 cardController.setData(data.get(i));
+                anchorPane.setOnMouseClicked((MouseEvent event) -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
+                    Stage addPopupStage = new Stage();
+                    try {
+                        Scene addScene = new Scene(loader.load(), 326, 499);
+                        AddItemController controller = loader.getController();
+                        addPopupStage.initModality(Modality.APPLICATION_MODAL);
+                        addPopupStage.initStyle(StageStyle.UNDECORATED);
+                        addPopupStage.setScene(addScene);
+                        controller.setData(cardController.pickItem);
+                        addPopupStage.show();
+                        controller.addButton.setOnMouseClicked((MouseEvent e) ->{
+                            if(controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null){
+                                controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
+                            }else{
+                                Item item = new Item(cardController.pickItem.getName(),controller.getPropertyFromBox(),controller.getQuantity(),controller.getSweetness());
+                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(),item.getProperty()));
+                                addItem(item);
+                                addPopupStage.close();
+                            }
+                        });
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
 
+                });
                 if (column == 6) {
                     column = 0;
                     row++;
@@ -233,6 +247,87 @@ public class HomeOrderController extends SwitchController{
                 coffeeGrid.setHgap(8);
                 coffeeGrid.setVgap(16);
                 coffeeGrid.setPadding(new Insets(0,36,0,40));
+            }
+            data = temp.getNonCoffeeMenu();
+            column = 0;
+            row = 1;
+            for (int i = 0; i < data.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/card.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setData(data.get(i));
+                anchorPane.setOnMouseClicked((MouseEvent event) -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
+                    Stage addPopupStage = new Stage();
+                    try {
+                        Scene addScene = new Scene(loader.load(), 326, 499);
+                        AddItemController controller = loader.getController();
+                        addPopupStage.initModality(Modality.APPLICATION_MODAL);
+                        addPopupStage.initStyle(StageStyle.UNDECORATED);
+                        addPopupStage.setScene(addScene);
+                        controller.setData(cardController.pickItem);
+                        addPopupStage.show();
+                        controller.addButton.setOnMouseClicked((MouseEvent e) ->{
+                            if(controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null){
+                                controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
+                            }else {
+                                Item item = new Item(cardController.pickItem.getName(), controller.getPropertyFromBox(), controller.getQuantity(), controller.getSweetness());
+                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(), item.getProperty()));
+                                addItem(item);
+                                addPopupStage.close();
+                            }
+                        });
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+                });
+                if (column == 6) {
+                    column = 0;
+                    row++;
+                }
+                noncoffeeGrid.add(anchorPane, column++, row); //(child,column,row)
+            }
+            noncoffeeGrid.setHgap(8);
+            noncoffeeGrid.setVgap(16);
+            noncoffeeGrid.setPadding(new Insets(0,36,0,40));
+            data = temp.getBakeryMenu();
+            column = 0;
+            row = 1;
+            for (int i = 0; i < data.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/card.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setData(data.get(i));
+                anchorPane.setOnMouseClicked((MouseEvent event) -> {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
+                    Stage addPopupStage = new Stage();
+                    try {
+                        Scene addScene = new Scene(loader.load(), 326, 499);
+                        AddItemController controller = loader.getController();
+                        addPopupStage.initModality(Modality.APPLICATION_MODAL);
+                        addPopupStage.initStyle(StageStyle.UNDECORATED);
+                        addPopupStage.setScene(addScene);
+                        controller.setData(cardController.pickItem);
+                        addPopupStage.show();
+                        controller.addButton.setOnMouseClicked((MouseEvent e) ->{
+                            Item item = new Item(cardController.pickItem.getName(),itemProperty.NONE,controller.getQuantity(),"");
+                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(),item.getProperty()));
+                            addItem(item);
+                            addPopupStage.close();
+                        });
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+                });
+                if (column == 6) {
+                    column = 0;
+                    row++;
+                }
+                bakeryGrid.add(anchorPane, column++, row); //(child,column,row)
+                bakeryGrid.setHgap(8);
+                bakeryGrid.setVgap(16);
+                bakeryGrid.setPadding(new Insets(0,36,0,40));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -291,10 +386,22 @@ public class HomeOrderController extends SwitchController{
                     }
                 });
                 paySecondController.submit.setOnMouseClicked((MouseEvent event) -> {
-                    //insert receipt
-                    //get receipt id
-                    //insert receipt_detail
-                    //close stage
+                    helper.insertReceipt(employee,member,getTotal());
+                    helper.insertReceiptDetail(receiptShow);
+                    member.setPoint(member.getPoint()+paySecondController.getPoint());
+                    helper.updatePoint(member);
+                    payPopup.close();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/home.fxml"));
+                    try{
+                        root = loader.load();
+                        HomeController homeController = loader.getController();
+                        homeController.setHelper(helper);
+                        homeController.setEmployee(employee);
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
                 });
                 payPopup.show();
             } catch (IOException e) {
@@ -304,6 +411,18 @@ public class HomeOrderController extends SwitchController{
         }
     }
 
+    private void addItem(Item item){
+        receiptShow.add(item);
+        totalPrice.setText(getTotal()+"");
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
 
 }

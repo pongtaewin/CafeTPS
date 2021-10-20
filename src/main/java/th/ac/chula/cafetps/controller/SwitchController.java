@@ -29,8 +29,8 @@ public abstract class SwitchController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
+
 
     public void switchToMonthlySum(ActionEvent event)throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/monthsum.fxml"));
@@ -73,4 +73,11 @@ public abstract class SwitchController {
         this.helper = helper;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }

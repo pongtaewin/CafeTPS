@@ -1,27 +1,27 @@
 package th.ac.chula.cafetps;
 
 public class Item {
-    private itemType type;
+    private itemProperty property;
     private int quantity,pricePerUnit;
     private String sweetness,name;
 
-    public Item(String name,itemType type,int quantity,String sweetness) {
+    public Item(String name, itemProperty property, int quantity, String sweetness) {
         this.name = name;
-        this.type = type;
+        this.property = property;
         this.quantity = quantity;
         this.sweetness = sweetness;
     }
 
-    public Item(String name,itemType type,int quantity,String sweetness,int pricePerUnit) {
-        this.type = type;
+    public Item(String name, itemProperty property, int quantity, String sweetness, int pricePerUnit) {
+        this.property = property;
         this.quantity = quantity;
         this.pricePerUnit = pricePerUnit;
         this.sweetness = sweetness;
         this.name = name;
     }
 
-    public itemType getType() {
-        return type;
+    public itemProperty getProperty() {
+        return property;
     }
 
     public int getQuantity() {
@@ -29,25 +29,16 @@ public class Item {
     }
 
     public String getName() {
-        String followType = "";
-        switch (type) {
-            case HOT:
-                 followType = "ร้อน";
-                 break;
-            case ICED:
-                followType = "เย็น";
-                break;
-            case FRAPPE:
-                followType = "ปั่น";
-                break;
-            case NONE:
-                break;
-        }
-        return name+followType;
+        if(property.getValue()==null) return name;
+        return name+property.getValue();
+    }
+
+    public String getOnlyName(){
+        return name;
     }
 
     public String getSweetness() {
-            return sweetness;
+        return sweetness;
     }
 
     public int getPricePerUnit() {

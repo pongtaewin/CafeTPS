@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 public class PriceTable {
 
-    private HashMap<String,HashMap<itemType,Integer>> priceTable;
+    private HashMap<String,HashMap<itemProperty,Integer>> priceTable;
 
     public PriceTable() {
         this.priceTable = new HashMap<>();
     }
 
-    public void addPrice(String name,itemType type,int price){
+    public void addPrice(String name, itemProperty type, int price){
         if(priceTable.containsKey(name)){
             priceTable.get(name).put(type,price);
         }else{
@@ -19,5 +19,5 @@ public class PriceTable {
         }
     }
 
-    public int getPrice(String name,itemType type) { return priceTable.get(name).get(type);}
+    public int getPrice(String name, itemProperty type) { return priceTable.get(name).get(type);}
 }
