@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import th.ac.chula.cafetps.Helper;
-import th.ac.chula.cafetps.User;
+import th.ac.chula.cafetps.model.User;
 
 import java.io.IOException;
 

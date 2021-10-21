@@ -1,15 +1,12 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.model;
 
 public class User {
     private String username;
     private String password;
 
     public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public User() {
+        setUsername(username);
+        setPassword(password);
     }
 
     public String getUsername() {

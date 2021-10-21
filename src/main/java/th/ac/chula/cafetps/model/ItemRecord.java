@@ -1,32 +1,23 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.model;
 
-public class itemRecord {
+import th.ac.chula.cafetps.ItemCategory;
+import th.ac.chula.cafetps.ItemProperty;
+
+public class ItemRecord {
     private int id;
     private String name;
-    private itemProperty property;
-    private itemCategory category;
+    private ItemProperty property;
+    private ItemCategory category;
     private int pricePerUnit;
     private int costPerUnit;
 
-    public itemRecord(int id, String name, String property, String category, int pricePerUnit,int costPerUnit) {
+    public ItemRecord(int id, String name, String property, String category, int pricePerUnit, int costPerUnit) {
         this.id = id;
         this.name = name;
         this.pricePerUnit = pricePerUnit;
         this.costPerUnit = costPerUnit;
-
-        if (property.equals("hot")){
-            this.property = itemProperty.HOT;
-        }else if(property.equals("iced")){
-            this.property = itemProperty.ICED;
-        }else if(property.equals("frappe")){
-            this.property = itemProperty.FRAPPE;
-        } else this.property = itemProperty.NONE;
-
-        if(category.equals("coffee")){
-           this.category = itemCategory.COFFEE;
-        }else if(category.equals("noncoffee")){
-            this.category = itemCategory.NONCOFFEE;
-        }else this.category = itemCategory.BAKERY;
+        this.property = ItemProperty.fromString(property);
+        this.category = ItemCategory.fromString(category);
     }
 
     public int getId() {
@@ -37,11 +28,11 @@ public class itemRecord {
         return name;
     }
 
-    public itemProperty getProperty() {
+    public ItemProperty getProperty() {
         return property;
     }
 
-    public itemCategory getCategory() {
+    public ItemCategory getCategory() {
         return category;
     }
 

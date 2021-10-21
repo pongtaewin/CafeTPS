@@ -8,9 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import th.ac.chula.cafetps.PickItem;
-import th.ac.chula.cafetps.itemProperty;
+import th.ac.chula.cafetps.ItemProperty;
 
 public class AddItemController {
+
+    // TODO: Convert AddItemController into subclasses.
 
     @FXML
     public Label alertmsg;
@@ -19,7 +21,7 @@ public class AddItemController {
     private Label nameLabel;
 
     @FXML
-    public ChoiceBox propertyBox;
+    public ChoiceBox<ItemProperty> propertyBox;
 
     @FXML
     public ChoiceBox sweetnessBox;
@@ -53,8 +55,8 @@ public class AddItemController {
         ));
     }
 
-    public itemProperty getPropertyFromBox(){
-        return (itemProperty) propertyBox.getValue();
+    public ItemProperty getPropertyFromBox(){
+        return (ItemProperty) propertyBox.getValue();
     }
 
     public int getQuantity() {

@@ -25,7 +25,4 @@ public class CoffeeController{
 
     private EventListener listener;
 
-
-
-
 }

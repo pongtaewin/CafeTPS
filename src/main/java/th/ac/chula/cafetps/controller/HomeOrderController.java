@@ -4,11 +4,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,6 +21,9 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import th.ac.chula.cafetps.*;
 import th.ac.chula.cafetps.MenuItem;
+import th.ac.chula.cafetps.model.Item;
+import th.ac.chula.cafetps.model.Member;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -176,11 +177,11 @@ public class HomeOrderController extends SwitchController{
         ArrayList<Item> recentOrder = temp.getRecentOrder();
         int column = 0;
         int row = 1;
-        if(member.getMemberID().equals("0")){
+        if(member.getID().equals("0")){
             memberName.setText("ไม่ได้เป็นสมาชิก");
             recentBox.setVisible(false);
         }else{
-            memberName.setText("ลูกค้า คุณ"+member.getMemberName());
+            memberName.setText("ลูกค้า คุณ"+member.getName());
             try {
                 for(int i = 0;i< 4;i++){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/recent_card.fxml"));
@@ -191,7 +192,7 @@ public class HomeOrderController extends SwitchController{
                         recentGrid.add(pane, i, 1); //(child,column,row)
                         pane.setOnMouseClicked((MouseEvent event) -> {
                             Item item = recentCardController.item;
-                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(),item.getProperty()));
+                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(),item.getProperty()));
                             addItem(recentCardController.item);
                         });
                     }
@@ -217,19 +218,14 @@ public class HomeOrderController extends SwitchController{
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
                     Stage addPopupStage = new Stage();
                     try {
-                        Scene addScene = new Scene(loader.load(), 326, 499);
-                        AddItemController controller = loader.getController();
-                        addPopupStage.initModality(Modality.APPLICATION_MODAL);
-                        addPopupStage.initStyle(StageStyle.UNDECORATED);
-                        addPopupStage.setScene(addScene);
-                        controller.setData(cardController.pickItem);
-                        addPopupStage.show();
+                        // TODO : Refactor Code
+                        AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
                         controller.addButton.setOnMouseClicked((MouseEvent e) ->{
                             if(controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null){
                                 controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
                             }else{
                                 Item item = new Item(cardController.pickItem.getName(),controller.getPropertyFromBox(),controller.getQuantity(),controller.getSweetness());
-                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(),item.getProperty()));
+                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(),item.getProperty()));
                                 addItem(item);
                                 addPopupStage.close();
                             }
@@ -260,19 +256,13 @@ public class HomeOrderController extends SwitchController{
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
                     Stage addPopupStage = new Stage();
                     try {
-                        Scene addScene = new Scene(loader.load(), 326, 499);
-                        AddItemController controller = loader.getController();
-                        addPopupStage.initModality(Modality.APPLICATION_MODAL);
-                        addPopupStage.initStyle(StageStyle.UNDECORATED);
-                        addPopupStage.setScene(addScene);
-                        controller.setData(cardController.pickItem);
-                        addPopupStage.show();
+                        AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
                         controller.addButton.setOnMouseClicked((MouseEvent e) ->{
                             if(controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null){
                                 controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
                             }else {
                                 Item item = new Item(cardController.pickItem.getName(), controller.getPropertyFromBox(), controller.getQuantity(), controller.getSweetness());
-                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(), item.getProperty()));
+                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(), item.getProperty()));
                                 addItem(item);
                                 addPopupStage.close();
                             }
@@ -302,16 +292,10 @@ public class HomeOrderController extends SwitchController{
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
                     Stage addPopupStage = new Stage();
                     try {
-                        Scene addScene = new Scene(loader.load(), 326, 499);
-                        AddItemController controller = loader.getController();
-                        addPopupStage.initModality(Modality.APPLICATION_MODAL);
-                        addPopupStage.initStyle(StageStyle.UNDECORATED);
-                        addPopupStage.setScene(addScene);
-                        controller.setData(cardController.pickItem);
-                        addPopupStage.show();
+                        AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
                         controller.addButton.setOnMouseClicked((MouseEvent e) ->{
-                            Item item = new Item(cardController.pickItem.getName(),itemProperty.NONE,controller.getQuantity(),"");
-                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getOnlyName(),item.getProperty()));
+                            Item item = new Item(cardController.pickItem.getName(), ItemProperty.NONE,controller.getQuantity(),"");
+                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(),item.getProperty()));
                             addItem(item);
                             addPopupStage.close();
                         });
@@ -388,7 +372,7 @@ public class HomeOrderController extends SwitchController{
                 paySecondController.submit.setOnMouseClicked((MouseEvent event) -> {
                     helper.insertReceipt(employee,member,getTotal());
                     helper.insertReceiptDetail(receiptShow);
-                    member.setPoint(member.getPoint()+paySecondController.getPoint());
+                    member.setPoints(member.getPoints()+paySecondController.getPoint());
                     helper.updatePoint(member);
                     payPopup.close();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/home.fxml"));
@@ -422,6 +406,19 @@ public class HomeOrderController extends SwitchController{
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+
+
+    private AddItemController getPopupStage(FXMLLoader loader, Stage addPopupStage, CardController cardController) throws IOException{
+        Scene addScene = new Scene(loader.load(), 326, 499);
+        AddItemController controller = loader.getController();
+        addPopupStage.initModality(Modality.APPLICATION_MODAL);
+        addPopupStage.initStyle(StageStyle.UNDECORATED);
+        addPopupStage.setScene(addScene);
+        controller.setData(cardController.pickItem);
+        addPopupStage.show();
+        return controller;
     }
 
 

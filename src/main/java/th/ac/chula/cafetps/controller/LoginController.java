@@ -11,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import th.ac.chula.cafetps.Helper;
-import th.ac.chula.cafetps.User;
+import th.ac.chula.cafetps.model.User;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 

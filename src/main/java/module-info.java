@@ -1,4 +1,4 @@
-module th.ac.chula.cafetps.cafetps {
+module th.ac.chula.cafetps {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -12,4 +12,6 @@ module th.ac.chula.cafetps.cafetps {
 
     opens th.ac.chula.cafetps.controller to javafx.fxml;
     exports th.ac.chula.cafetps.controller;
+    exports th.ac.chula.cafetps.model;
+    opens th.ac.chula.cafetps.model to javafx.fxml;
 }

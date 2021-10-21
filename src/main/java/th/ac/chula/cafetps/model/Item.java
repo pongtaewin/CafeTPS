@@ -1,26 +1,28 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.model;
+
+import th.ac.chula.cafetps.ItemProperty;
 
 public class Item {
-    private itemProperty property;
-    private int quantity,pricePerUnit;
-    private String sweetness,name;
+    private ItemProperty property;
+    private int quantity;
+    private int pricePerUnit;
+    private String sweetness;
+    private String name;
 
-    public Item(String name, itemProperty property, int quantity, String sweetness) {
+    public Item(String name, ItemProperty property, int quantity, String sweetness) {
         this.name = name;
         this.property = property;
         this.quantity = quantity;
         this.sweetness = sweetness;
     }
 
-    public Item(String name, itemProperty property, int quantity, String sweetness, int pricePerUnit) {
-        this.property = property;
-        this.quantity = quantity;
+    public Item(String name, ItemProperty property, int quantity, String sweetness, int pricePerUnit) {
+        this(name, property, quantity, sweetness);
         this.pricePerUnit = pricePerUnit;
-        this.sweetness = sweetness;
-        this.name = name;
+
     }
 
-    public itemProperty getProperty() {
+    public ItemProperty getProperty() {
         return property;
     }
 
@@ -28,12 +30,12 @@ public class Item {
         return quantity;
     }
 
-    public String getName() {
+    public String getDisplayName() {
         if(property.getValue()==null) return name;
-        return name+property.getValue();
+        return name + property.getValue();
     }
 
-    public String getOnlyName(){
+    public String getName(){
         return name;
     }
 

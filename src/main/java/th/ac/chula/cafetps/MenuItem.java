@@ -1,5 +1,9 @@
 package th.ac.chula.cafetps;
 
+import th.ac.chula.cafetps.model.Item;
+import th.ac.chula.cafetps.model.ItemRecord;
+import th.ac.chula.cafetps.model.Member;
+
 import java.util.ArrayList;
 
 public class MenuItem {
@@ -10,36 +14,36 @@ public class MenuItem {
         coffeeMenu = new ArrayList<>();
         nonCoffeeMenu = new ArrayList<>();
         bakeryMenu = new ArrayList<>();
-        ArrayList<itemRecord> records = helper.getRecords();
+        ArrayList<ItemRecord> records = helper.getRecords();
         PriceTable priceTable = helper.getPriceTable();
         ArrayList<String> tempArrayCoffee = new ArrayList<>();
         ArrayList<String> tempArrayNon = new ArrayList<>();
         for(int i = 0;i<records.size();i++) {
-            itemRecord temp = records.get(i);
+            ItemRecord temp = records.get(i);
             priceTable.addPrice(temp.getName(), temp.getProperty(), temp.getPricePerUnit());
-            if(temp.getCategory()==itemCategory.COFFEE){
+            if(temp.getCategory()== ItemCategory.COFFEE){
                 if(!tempArrayCoffee.contains(temp.getName())){
                     coffeeMenu.add(new PickItem(temp.getName(),true));
                     tempArrayCoffee.add(temp.getName());
 
                 }
                 coffeeMenu.get(tempArrayCoffee.indexOf(temp.getName())).addAvailableProperty(temp.getProperty());
-            }else if(temp.getCategory()==itemCategory.NONCOFFEE){
+            }else if(temp.getCategory()== ItemCategory.NONCOFFEE){
                 if(!tempArrayNon.contains(temp.getName())) {
                     nonCoffeeMenu.add(new PickItem(temp.getName(), true));
                     tempArrayNon.add(temp.getName());
                 }
                 nonCoffeeMenu.get(tempArrayNon.indexOf(temp.getName())).addAvailableProperty(temp.getProperty());
-            }else if(temp.getCategory()==itemCategory.BAKERY){
+            }else if(temp.getCategory()== ItemCategory.BAKERY){
                 bakeryMenu.add(new PickItem(temp.getName(), false));
             }
         }
     }
 
-    public MenuItem(Helper helper,Member member) {
+    public MenuItem(Helper helper, Member member) {
         this(helper);
-        if(!member.getMemberID().equals("0"))
-        recentOrder = helper.getRecentOrder(member.getMemberID());
+        if(!member.getID().equals("0"))
+        recentOrder = helper.getRecentOrder(member.getID());
     }
 
     public ArrayList<Item> getRecentOrder() {

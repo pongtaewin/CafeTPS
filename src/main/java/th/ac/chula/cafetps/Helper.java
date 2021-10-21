@@ -1,6 +1,10 @@
 package th.ac.chula.cafetps;
 
 import javafx.collections.ObservableList;
+import th.ac.chula.cafetps.model.Item;
+import th.ac.chula.cafetps.model.ItemRecord;
+import th.ac.chula.cafetps.model.Member;
+import th.ac.chula.cafetps.model.User;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -16,14 +20,14 @@ public class Helper {
 
     // don't forget to change path
     public static final  String DATABASE_NAME = "jdbc:sqlite:/D:\\sqlite3\\Cafe.sqlite";
-    private ArrayList<itemRecord> records;
+    private ArrayList<ItemRecord> records;
     private PriceTable priceTable;
 
     public Helper() {
         this.records = getItemRecord();
         this.priceTable = new PriceTable();
         for(int i = 0;i<records.size();i++) {
-            itemRecord temp = records.get(i);
+            ItemRecord temp = records.get(i);
             priceTable.addPrice(temp.getName(), temp.getProperty(), temp.getPricePerUnit());
         }
     }
@@ -150,15 +154,15 @@ public class Helper {
             }
         }return null;
     }
-    public ArrayList<itemRecord> getItemRecord(){
+    public ArrayList<ItemRecord> getItemRecord(){
         Connection connection = connect();
-        ArrayList<itemRecord> data = new ArrayList<>();
+        ArrayList<ItemRecord> data = new ArrayList<>();
         String sql = "SELECT * FROM Item";
         try{
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
             while(result.next()) {
-                data.add(new itemRecord(Integer.parseInt(result.getString("item_id")),result.getString("item_name"),
+                data.add(new ItemRecord(Integer.parseInt(result.getString("item_id")),result.getString("item_name"),
                         result.getString("property")==null ? "":result.getString("property"),result.getString("category"),result.getInt("priceperunit"),result.getInt("costperunit")));
             }
             connection.close();
@@ -169,9 +173,9 @@ public class Helper {
     }
 
     public void updatePoint(Member member){
-        if(member.getMemberID().equals("0")) return;
+        if(member.getID().equals("0")) return;
         Connection connection = connect();
-        String sql = String.format("UPDATE Member SET point = %.2f WHERE m_id = '%s'",member.getPoint(),member.getMemberID());
+        String sql = String.format("UPDATE Member SET point = %.2f WHERE m_id = '%s'",member.getPoints(),member.getID());
         try{
             Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
@@ -185,7 +189,7 @@ public class Helper {
         return priceTable;
     }
 
-    public ArrayList<itemRecord> getRecords() {
+    public ArrayList<ItemRecord> getRecords() {
         return records;
     }
 
@@ -206,7 +210,7 @@ public class Helper {
         String commandReceipt = "INSERT INTO Receipt VALUES(null,?,?,?,?)";
         try{
             PreparedStatement statement = connection.prepareStatement(commandReceipt);
-            statement.setString(1,member.getMemberID());
+            statement.setString(1,member.getID());
             statement.setString(2,employee.getUsername());
             statement.setInt(3,total);
             statement.setString(4,getNow());
@@ -246,8 +250,8 @@ public class Helper {
     }
 
     public int getItemID(Item item) {
-        for(itemRecord record: records){
-            if(record.getProperty()==item.getProperty() && record.getName().equals(item.getOnlyName())){
+        for(ItemRecord record: records){
+            if(record.getProperty()==item.getProperty() && record.getName().equals(item.getName())){
                 return record.getId();
             }
         }return 0;

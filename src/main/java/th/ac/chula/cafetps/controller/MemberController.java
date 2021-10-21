@@ -7,8 +7,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import th.ac.chula.cafetps.Helper;
-import th.ac.chula.cafetps.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

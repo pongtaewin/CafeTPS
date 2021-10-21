@@ -6,7 +6,7 @@ import java.util.List;
 public class PickItem {
 
     private String name;
-    private List<itemProperty> availableProperty;
+    private List<ItemProperty> availableProperty;
     private boolean pickSweetness;
 
     public PickItem(String name,boolean pickSweetness) {
@@ -15,16 +15,16 @@ public class PickItem {
         this.pickSweetness = pickSweetness;
     }
 
-    public PickItem(String name, itemProperty availableProperty, boolean pickSweetness) {
+    public PickItem(String name, ItemProperty availableProperty, boolean pickSweetness) {
         this(name, pickSweetness);
         this.availableProperty.add(availableProperty);
     }
 
-    public void addAvailableProperty(itemProperty type){
+    public void addAvailableProperty(ItemProperty type){
         availableProperty.add(type);
     }
 
-    public List<itemProperty> getAvailableProperty() {
+    public List<ItemProperty> getAvailableProperty() {
         return availableProperty;
     }
 
