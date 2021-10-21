@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="326.0" style="-fx-background-color: #ffffff; -fx-border-color: #c4c4c4; -fx-border-width: 2;" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.chula.cafetps.controller.AddItemController">
+   <children>
+      <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="95.0" layoutY="33.0" prefHeight="57.0" prefWidth="138.0" styleClass="pay-box" text="ชื่อ">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <VBox layoutX="36.0" layoutY="129.0" prefHeight="200.0" prefWidth="271.0" spacing="32.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
+               <children>
+                  <Label fx:id="unit" prefHeight="38.0" prefWidth="92.0" styleClass="pay-box" text="ประเภท">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="propertyBox" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="16.0">
+               <children>
+                  <Label fx:id="unit2" prefHeight="49.0" prefWidth="140.0" styleClass="pay-box" text="ความหวาน">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="sweetnessBox" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="unit21" prefHeight="49.0" prefWidth="179.0" styleClass="pay-box" text="จำนวน" textAlignment="CENTER">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="minusButton" maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" onAction="#minus" styleClass="add-popup-button">
+                     <graphic>
+                        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z" fill="RED" scaleX="1.5" scaleY="1.5" />
+                     </graphic>
+                  </Button>
+                  <Label fx:id="amount" alignment="CENTER" layoutX="76.0" layoutY="10.0" prefHeight="49.0" prefWidth="140.0" styleClass="numeric-light" text="1" textAlignment="CENTER">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="plusButton" maxHeight="48.0" maxWidth="64.0" minHeight="48.0" minWidth="48.0" mnemonicParsing="false" onAction="#plus" prefHeight="48.0" prefWidth="48.0" styleClass="add-popup-button">
+                     <graphic>
+                        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4 11h-3v3c0 .55-.45 1-1 1s-1-.45-1-1v-3H8c-.55 0-1-.45-1-1s.45-1 1-1h3V8c0-.55.45-1 1-1s1 .45 1 1v3h3c.55 0 1 .45 1 1s-.45 1-1 1z" fill="#4bd34e" scaleX="1.5" scaleY="1.5" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="addButton" layoutY="425.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="326.0" styleClass="submit-button" text="เพิ่มรายการ" textFill="WHITE" />
+      <Label fx:id="alertmsg" alignment="CENTER" layoutY="380.0" maxWidth="326.0" prefHeight="30.0" prefWidth="326.0" styleClass="alert-msg" />
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

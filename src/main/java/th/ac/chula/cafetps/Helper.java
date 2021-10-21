@@ -1,5 +1,7 @@
 package th.ac.chula.cafetps;
 
+import javafx.collections.ObservableList;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -22,7 +24,7 @@ public class Helper {
         this.priceTable = new PriceTable();
         for(int i = 0;i<records.size();i++) {
             itemRecord temp = records.get(i);
-            priceTable.addPrice(temp.getName(), temp.getType(), temp.getPricePerUnit());
+            priceTable.addPrice(temp.getName(), temp.getProperty(), temp.getPricePerUnit());
         }
     }
 
@@ -63,7 +65,7 @@ public class Helper {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
             if(!result.isClosed()) {
-                member = new Member(result.getString("m_id"),result.getString("m_name").split(" ")[0],Integer.parseInt(result.getString("point")));
+                member = new Member(result.getString("m_id"),result.getString("m_name").split(" ")[0],result.getInt("point"));
             }
             connection.close();
         }catch (SQLException e){
@@ -119,18 +121,18 @@ public class Helper {
         }
     }
 
-    public ArrayList<Item> getLastOrder(String phoneNumber){
+    public ArrayList<Item> getRecentOrder(String phoneNumber){
         ArrayList<Item> toReturn = new ArrayList<>();
-        String getRID = "SELECT max(r_id) FROM Receipt WHERE m_id = `phoneNumber`";
-        String getLastOrder = "SELECT * FROM Receipt_Detail WHERE  r_id =";
+        String getRecent = "SELECT max(r_id) FROM Receipt WHERE m_id = '%s'".formatted(phoneNumber);
+        String getLastOrder = "SELECT * FROM Receipt_Detail WHERE  r_id = '%s'";
         int Receipt_id;
         Connection connection = connect();
         try{
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(getRID);
+            ResultSet result = statement.executeQuery(getRecent);
             result.next();
             Receipt_id = result.getInt(1);
-            getLastOrder += ""+Receipt_id;
+            getLastOrder = getLastOrder.formatted(Receipt_id);
             result = statement.executeQuery(getLastOrder);
             while (result.next()){
                 toReturn.add(getItemFromID(result.getInt("item_id"),result.getInt("amount"),result.getString("sweetness")));
@@ -144,7 +146,7 @@ public class Helper {
     private Item getItemFromID(int id,int quantity,String sweetness){
         for (int i = 0;i<records.size();i++){
             if(records.get(i).getId()==id){
-                return new Item(records.get(i).getName(),records.get(i).getType(),quantity,sweetness);
+                return new Item(records.get(i).getName(),records.get(i).getProperty(),quantity,sweetness);
             }
         }return null;
     }
@@ -157,7 +159,7 @@ public class Helper {
             ResultSet result = statement.executeQuery(sql);
             while(result.next()) {
                 data.add(new itemRecord(Integer.parseInt(result.getString("item_id")),result.getString("item_name"),
-                        result.getString("type"),result.getString("category"),Integer.parseInt(result.getString("priceperunit"))));
+                        result.getString("property")==null ? "":result.getString("property"),result.getString("category"),result.getInt("priceperunit"),result.getInt("costperunit")));
             }
             connection.close();
         }catch (SQLException e){
@@ -167,6 +169,7 @@ public class Helper {
     }
 
     public void updatePoint(Member member){
+        if(member.getMemberID().equals("0")) return;
         Connection connection = connect();
         String sql = String.format("UPDATE Member SET point = %.2f WHERE m_id = '%s'",member.getPoint(),member.getMemberID());
         try{
@@ -184,6 +187,70 @@ public class Helper {
 
     public ArrayList<itemRecord> getRecords() {
         return records;
+    }
+
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    public void insertReceipt(User employee,Member member,int total){
+        Connection connection = connect();
+        String commandReceipt = "INSERT INTO Receipt VALUES(null,?,?,?,?)";
+        try{
+            PreparedStatement statement = connection.prepareStatement(commandReceipt);
+            statement.setString(1,member.getMemberID());
+            statement.setString(2,employee.getUsername());
+            statement.setInt(3,total);
+            statement.setString(4,getNow());
+            statement.executeUpdate();
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void insertReceiptDetail(ObservableList<Item> receipt){
+            Connection connection = connect();
+            String command = "INSERT INTO Receipt_Detail VALUES(?,?,?,?)";
+            String getRID = "SELECT MAX(r_id) FROM Receipt";
+            int r_id;
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(getRID);
+                resultSet.next();
+                r_id = resultSet.getInt(1);
+                System.out.println(r_id);
+                PreparedStatement preparedStatement = connection.prepareStatement(command);
+                for (Item item: receipt) {
+                    int itemID = getItemID(item);
+                    if(itemID==0) throw new IllegalArgumentException();
+                    preparedStatement.setInt(1, r_id);
+                    preparedStatement.setInt(2, itemID);
+                    preparedStatement.setInt(3, item.getQuantity());
+                    preparedStatement.setString(4, item.getSweetness());
+                    preparedStatement.executeUpdate();
+                }
+                connection.close();
+
+        }catch (SQLException | IllegalArgumentException e){
+                e.printStackTrace();
+            }
+    }
+
+    public int getItemID(Item item) {
+        for(itemRecord record: records){
+            if(record.getProperty()==item.getProperty() && record.getName().equals(item.getOnlyName())){
+                return record.getId();
+            }
+        }return 0;
     }
 }
 

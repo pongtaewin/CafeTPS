@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="326.0" style="-fx-background-color: #ffffff; -fx-border-color: #c4c4c4; -fx-border-width: 2;" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.chula.cafetps.controller.PaySecondController">
+   <children>
+      <Label layoutX="118.0" layoutY="32.0" styleClass="pay-box" text="ชำระเงิน">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="submit" layoutY="375.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="326.0" styleClass="submit-button" stylesheets="@stylesheet.css" text="เสร็จสิ้น" textFill="WHITE" />
+      <VBox prefHeight="294.0" prefWidth="326.0" spacing="24.0">
+         <children>
+            <HBox prefHeight="26.0" prefWidth="326.0" spacing="110.0">
+               <children>
+                  <Label styleClass="pay-box" text="รับเงินมา">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gottenMoney" prefHeight="57.0" prefWidth="60.0" style="-fx-font-weight: 700" text="1000">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="33.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="113.0" spacing="110.0">
+               <children>
+                  <Label prefWidth="90.0" styleClass="pay-box" text="ยอดชำระ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="total" prefHeight="61.0" prefWidth="60.0" style="-fx-font-weight: 700" text="1000">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="33.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="113.0" spacing="110.0">
+               <children>
+                  <Label prefWidth="90.0" styleClass="pay-box" text="ทอนเงิน">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="changeAmt" prefHeight="59.0" prefWidth="60.0" style="-fx-font-weight: 700" text="1000">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="33.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="96.0" />
+         </padding>
+      </VBox>
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F8F8F8;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="th.ac.chula.cafetps.controller.LoginController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0">
+         <top>
+            <Pane prefHeight="97.0" prefWidth="200.0" styleClass="custom-pane" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutX="83.0" prefHeight="96.0" prefWidth="698.0" spacing="10.0" visible="false">
+                     <children>
+                        <Button graphicTextGap="16.0" maxHeight="97.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="173.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Home" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                        <Button disable="true" graphicTextGap="16.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="262.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Monthly summary" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M19 2h-4.18C14.4.84 13.3 0 12 0S9.6.84 9.18 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 18H6c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1h1v1c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V4h1c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                        <Button disable="true" graphicTextGap="16.0" layoutX="83.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="214.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Membership" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane maxHeight="566.0" maxWidth="455.0" style="-fx-background-color: #ffffff;" stylesheets="@stylesheet.css" BorderPane.alignment="TOP_CENTER">
+               <BorderPane.margin>
+                  <Insets top="110.0" />
+               </BorderPane.margin>
+               <children>
+                  <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#6b81c9" layoutX="215.0" layoutY="92.0" scaleX="4.0" scaleY="4.0" />
+                  <VBox layoutX="111.0" layoutY="199.0" prefHeight="200.0" prefWidth="232.0" spacing="40.0">
+                     <children>
+                        <VBox prefHeight="67.0" prefWidth="238.0" spacing="16.0" stylesheets="@stylesheet.css">
+                           <children>
+                              <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-pane" text="ผู้ใช้งาน">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="217.0" styleClass="text-box" stylesheets="@stylesheet.css" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="67.0" prefWidth="238.0" spacing="16.0">
+                           <children>
+                              <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login-pane" text="รหัสผ่าน">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <PasswordField fx:id="passwordField" styleClass="text-box" stylesheets="@stylesheet.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></PasswordField>
+                           </children>
+                        </VBox>
+                        <Label fx:id="alertmsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="234.0" styleClass="alert-msg" textAlignment="CENTER" textFill="#ff4949">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Button graphicTextGap="0.0" layoutY="503.0" mnemonicParsing="false" onAction="#login" prefHeight="63.0" prefWidth="455.0" style="-fx-border-style: none;" styleClass="submit-button" stylesheets="@stylesheet.css" text="เข้าสู่ระบบ" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+               <effect>
+                  <DropShadow height="23.96" offsetY="3.0" radius="17.35" width="47.44">
+                     <color>
+                        <Color red="0.7099999785423279" green="0.7099999785423279" blue="0.7099999785423279" opacity="0.97826087474823" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
