@@ -11,7 +11,7 @@ import java.io.IOException;
 public class CafeTPSApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CafeTPSApplication.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = Utility.loadResource(getClass(),"login");
         Scene scene = new Scene(fxmlLoader.load(), 1440, 1024);
         LoginController loginController = fxmlLoader.getController();
         loginController.setStage(primaryStage);

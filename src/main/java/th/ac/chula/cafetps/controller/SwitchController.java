@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import th.ac.chula.cafetps.Helper;
+import th.ac.chula.cafetps.Utility;
 import th.ac.chula.cafetps.model.User;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public abstract class SwitchController {
     protected Parent root;
 
     public void switchToHome(ActionEvent event)throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/home.fxml"));
+        FXMLLoader loader = Utility.loadResource(getClass(),"home");
         root = loader.load();
         HomeController homeController = loader.getController();
         homeController.setHelper(helper);
@@ -33,12 +34,11 @@ public abstract class SwitchController {
 
 
     public void switchToMonthlySum(ActionEvent event)throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/summary.fxml"));
+        FXMLLoader loader = Utility.loadResource(getClass(),"monthSum");
         root = loader.load();
-        MonthController monthController = loader.getController();
-        monthController.setHelper(helper);
-        monthController.setEmployee(employee);
-        monthController.init();
+//        MonthSumController monthController = loader.getController();
+//        homeController.setHelper(helper);
+//        homeController.setEmployee(employee);
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -47,7 +47,7 @@ public abstract class SwitchController {
     }
 
     public void switchToMembership(ActionEvent event)throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/membership.fxml"));
+        FXMLLoader loader = Utility.loadResource(getClass(),"membership");
         root = loader.load();
         MemberController memberController = loader.getController();
         memberController.setHelper(helper);

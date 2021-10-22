@@ -84,7 +84,7 @@ public class HomeOrderController extends SwitchController{
     public void initialize(){
         receiptShow = FXCollections.observableArrayList();
 
-        nameItemCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameItemCol.setCellValueFactory(new PropertyValueFactory<>("displayName"));
         sweetnessCol.setCellValueFactory(new PropertyValueFactory<>("sweetness"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -105,12 +105,10 @@ public class HomeOrderController extends SwitchController{
                     } else {
                         SVGPath deleteIcon = new SVGPath();
                         deleteIcon.setContent(deletePath);
-                        deleteIcon.setStyle(
-                                " -fx-cursor: hand ;"
+                        deleteIcon.setStyle(" -fx-cursor: hand ;"
                                         + "-glyph-size:24px;"
                                         + "-fx-fill:#FF0000;"
-                                        + "-fx-opacity: 54%;"
-                        );
+                                        + "-fx-opacity: 54%;");
 
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
                             Item selectedItem = receiptTable.getSelectionModel().getSelectedItem();
@@ -184,7 +182,7 @@ public class HomeOrderController extends SwitchController{
             memberName.setText("ลูกค้า คุณ"+member.getName());
             try {
                 for(int i = 0;i< 4;i++){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/recent_card.fxml"));
+                    FXMLLoader loader = Utility.loadResource(getClass(),"recent_card");
                     AnchorPane pane = loader.load();
                     RecentCardController recentCardController = loader.getController();
                     if(i<recentOrder.size()){
@@ -210,12 +208,12 @@ public class HomeOrderController extends SwitchController{
         data = temp.getCoffeeMenu();
         try {
             for (int i = 0; i < data.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/card.fxml"));
+                FXMLLoader fxmlLoader = Utility.loadResource(getClass(),"card");
                 AnchorPane anchorPane = fxmlLoader.load();
                 CardController cardController = fxmlLoader.getController();
                 cardController.setData(data.get(i));
                 anchorPane.setOnMouseClicked((MouseEvent event) -> {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
+                    FXMLLoader loader = Utility.loadResource(getClass(),"add_item");
                     Stage addPopupStage = new Stage();
                     try {
                         // TODO : Refactor Code
@@ -248,12 +246,12 @@ public class HomeOrderController extends SwitchController{
             column = 0;
             row = 1;
             for (int i = 0; i < data.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/card.fxml"));
+                FXMLLoader fxmlLoader = Utility.loadResource(getClass(),"card");
                 AnchorPane anchorPane = fxmlLoader.load();
                 CardController cardController = fxmlLoader.getController();
                 cardController.setData(data.get(i));
                 anchorPane.setOnMouseClicked((MouseEvent event) -> {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
+                    FXMLLoader loader = Utility.loadResource(getClass(),"add_item");
                     Stage addPopupStage = new Stage();
                     try {
                         AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
@@ -293,12 +291,12 @@ public class HomeOrderController extends SwitchController{
             column = 0;
             row = 1;
             for (int i = 0; i < data.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/card.fxml"));
+                FXMLLoader fxmlLoader = Utility.loadResource(getClass(),"card");
                 AnchorPane anchorPane = fxmlLoader.load();
                 CardController cardController = fxmlLoader.getController();
                 cardController.setData(data.get(i));
                 anchorPane.setOnMouseClicked((MouseEvent event) -> {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/add_item.fxml"));
+                    FXMLLoader loader = Utility.loadResource(getClass(),"add_item");
                     Stage addPopupStage = new Stage();
                     try {
                         AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
@@ -338,14 +336,14 @@ public class HomeOrderController extends SwitchController{
     public void submitOrder() throws InterruptedException{
         if(receiptShow.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.getDialogPane().getStylesheets().add(getClass().getResource("/th/ac/chula/cafetps/stylesheet.css").toExternalForm());
+            alert.getDialogPane().getStylesheets().add(Utility.loadStyleSheet(getClass()));
             alert.setContentText("ไม่มีสินค้า");
             alert.initStyle(StageStyle.UNDECORATED);
             alert.show();
         }else {
             int total = getTotal();
-            FXMLLoader firstSceneLoader = new FXMLLoader(CafeTPSApplication.class.getResource("/th/ac/chula/cafetps/pay_first.fxml"));
-            FXMLLoader secondSceneLoader = new FXMLLoader(CafeTPSApplication.class.getResource("/th/ac/chula/cafetps/pay_second.fxml"));
+            FXMLLoader firstSceneLoader = Utility.loadResource(CafeTPSApplication.class,"pay_first");
+            FXMLLoader secondSceneLoader = Utility.loadResource(CafeTPSApplication.class,"pay_second");
             try {
                 Scene pay1Scene = new Scene(firstSceneLoader.load(), 326, 448);
                 Scene pay2Scene = new Scene(secondSceneLoader.load(), 326, 448);
@@ -360,7 +358,7 @@ public class HomeOrderController extends SwitchController{
                     String temp = payFirstController.getMoneyField.getText();
                     if(temp.equals("")||!helper.isNumeric(temp)){
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.getDialogPane().getStylesheets().add(getClass().getResource("/th/ac/chula/cafetps/stylesheet.css").toExternalForm());
+                        alert.getDialogPane().getStylesheets().add(Utility.loadStyleSheet(getClass()));
                         alert.setContentText("กรุณากรอกจำนวนเงิน");
                         alert.initStyle(StageStyle.UNDECORATED);
                         alert.show();
@@ -368,7 +366,7 @@ public class HomeOrderController extends SwitchController{
                         int gottenMoney = Integer.parseInt(temp);
                         if(gottenMoney < total) {
                             Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.getDialogPane().getStylesheets().add(getClass().getResource("/th/ac/chula/cafetps/stylesheet.css").toExternalForm());
+                            alert.getDialogPane().getStylesheets().add(Utility.loadStyleSheet(getClass()));
                             alert.setContentText("กรุณารับเงินให้ถูกต้อง");
                             alert.initStyle(StageStyle.UNDECORATED);
                             alert.show();
@@ -384,7 +382,7 @@ public class HomeOrderController extends SwitchController{
                     member.setPoints(member.getPoints()+paySecondController.getPoint());
                     helper.updatePoint(member);
                     payPopup.close();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/home.fxml"));
+                    FXMLLoader loader = Utility.loadResource(getClass(),"home");;
                     try{
                         root = loader.load();
                         HomeController homeController = loader.getController();
