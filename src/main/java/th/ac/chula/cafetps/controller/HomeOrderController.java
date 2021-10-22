@@ -84,7 +84,7 @@ public class HomeOrderController extends SwitchController{
     public void initialize(){
         receiptShow = FXCollections.observableArrayList();
 
-        nameItemCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameItemCol.setCellValueFactory(new PropertyValueFactory<>("displayName"));
         sweetnessCol.setCellValueFactory(new PropertyValueFactory<>("sweetness"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
