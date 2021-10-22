@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 
 .root{
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-font-family: 'Ubuntu';
 }
 
@@ -109,4 +110,26 @@
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-background-radius: 0;
+}
+.chart-legend {
+    -fx-background-color:  transparent;
+    -fx-padding: 20px;
+    -fx-font-size: 18px;
+}
+
+.chart-legend-item-symbol{
+    -fx-scale-x: 1.25;
+    -fx-scale-y: 1.25;
+}
+
+.chart-legend-item{
+    -fx-padding: 2px;
+    -fx-text-fill: #191970;
+}
+.get-only-Noto{
+    -fx-font-family: 'Noto Sans Thai';
+}
+.get-only-Ubuntu{
+    -fx-font-family: 'Ubuntu';
+    -fx-font-weight: 400;
 }

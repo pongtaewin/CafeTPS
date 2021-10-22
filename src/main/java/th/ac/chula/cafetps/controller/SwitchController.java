@@ -33,11 +33,12 @@ public abstract class SwitchController {
 
 
     public void switchToMonthlySum(ActionEvent event)throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/monthsum.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/summary.fxml"));
         root = loader.load();
-//        MonthSumController monthController = loader.getController();
-//        homeController.setHelper(helper);
-//        homeController.setEmployee(employee);
+        MonthController monthController = loader.getController();
+        monthController.setHelper(helper);
+        monthController.setEmployee(employee);
+        monthController.init();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
