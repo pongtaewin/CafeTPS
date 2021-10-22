@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
+.root{
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-color: #f8f8f8;
+}
+
+.chart-legend-item-symbol{
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+}
+.custom-pane {
+    -fx-background-radius: 0px 0px 20px 20px;
+    -fx-background-color: #526ED0;
+}
+.chart-legend-item{
+    -fx-font-size: 16px;
+    -fx-padding: 2px 0px 0px 6px;
+    -fx-text-fill: #191970;
+}
+
+.navbar-button:hover{
+    -fx-opacity: 1;
+}
+
+.navbar-button {
+    -fx-font-family: 'Ubuntu';
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-background-color: #526ED0;
+    -fx-background-radius: 0px;
+}
+.month-label{
+    -fx-font-family: "Noto Sans Thai";
+    -fx-font-size: 36px;
+}
+.year-label{
+    -fx-font-family: 'Ubuntu';
+    -fx-font-size: 36px;
+}
+.normal-label{
+    -fx-font-family: 'Noto Sans Thai';
+    -fx-font-size: 24px;
+}
+.normal-number-label{
+    -fx-font-family: 'Ubuntu';
+    -fx-font-size: 24px;
+}
+.small-label{
+    -fx-font-family: 'Noto Sans Thai';
+    -fx-font-size: 20px;
+    -fx-text-fill: #A4A4A4;
+}
+.small-number-label{
+    -fx-font-family: 'Ubuntu';
+    -fx-font-size: 20px;
+    -fx-text-fill: #a4a4a4;
+}
+.combo-box{
+    -fx-font-family: "Ubuntu";
+    -fx-font-size: 18px;
+}
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane
+{
+    -fx-background-color: white;
+    -fx-padding: 0 -1 -1 -1;
+    -fx-tab-min-width:120px;
+    -fx-tab-max-width:120px;
+    -fx-tab-min-height:32px;
+    -fx-tab-max-height:32px;
+}
+.tab-pane:focused{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #e6e6e6;
+    -fx-padding: 0px 0px 10px 0px;
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #3c3c3c;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-family: "Noto Sans Thai";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-min-height: 20px;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
+
+}.tab-pane:top *.tab-header-area {
+     -fx-background-insets: 0, 0 0 1 0;
+     -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+ }
+.tab-pane:left *.tab-header-area {
+      -fx-background-insets: 0, 0 0 1 0;
+      -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+}
+.tab-pane:right *.tab-header-area {
+      -fx-background-insets: 0, 0 0 1 0;
+      -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+}.tab-pane:bottom *.tab-header-area {
+     -fx-background-insets: 0, 0 0 1 0;
+     -fx-padding: 0.416667em 0.166667em 0.0em 0.0em; /* overridden as 5 2 0 0 */
+ }

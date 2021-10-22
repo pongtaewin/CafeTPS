@@ -13,4 +13,9 @@
       <module name="CafeTPS" target="15" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CafeTPS" options="--add-exports javafx.controls/com.sun.javafx.charts=ALL-UNNAMED,th.ac.chula.cafetps" />
+    </option>
+  </component>
 </project>

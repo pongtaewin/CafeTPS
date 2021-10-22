@@ -34,11 +34,12 @@ public abstract class SwitchController {
 
 
     public void switchToMonthlySum(ActionEvent event)throws IOException {
-        FXMLLoader loader = Utility.loadResource(getClass(),"monthSum");
+        FXMLLoader loader = Utility.loadResource(getClass(),"summary");
         root = loader.load();
-//        MonthSumController monthController = loader.getController();
-//        homeController.setHelper(helper);
-//        homeController.setEmployee(employee);
+        MonthController monthController = loader.getController();
+        monthController.setHelper(helper);
+        monthController.setEmployee(employee);
+        monthController.init();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
