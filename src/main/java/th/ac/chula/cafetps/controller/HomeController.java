@@ -4,21 +4,17 @@ package th.ac.chula.cafetps.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
-import th.ac.chula.cafetps.Helper;
 import th.ac.chula.cafetps.Member;
-import th.ac.chula.cafetps.MenuItem;
 import th.ac.chula.cafetps.PickItem;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -30,28 +26,21 @@ public class HomeController extends SwitchController {
     private TextField memberField;
 
     @FXML
+    private SVGPath icon;
+
+    @FXML
     private Label alertmsg;
 
     @FXML
     private ScrollPane scrollPane;
 
-    @FXML
-    private GridPane coffeeGrid;
-
-    @FXML
-    private GridPane noncoffeeGrid;
-
-    @FXML
-    private GridPane bakeryGrid;
-
-
     private Member member;
-    private ArrayList<PickItem> data;
     private final String phoneCheck = "^0\\d{9}$";
     private final Pattern phonePattern = Pattern.compile(phoneCheck,Pattern.MULTILINE);
 
     @FXML
     public void initialize(){
+        icon.setStyle("-fx-fill: #6b81c9;");
         scrollPane.setDisable(true);
     }
 

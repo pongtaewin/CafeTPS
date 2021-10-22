@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F8F8F8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.chula.cafetps.controller.MonthController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0">
+         <top>
+            <Pane prefHeight="97.0" prefWidth="200.0" styleClass="custom-pane" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutX="83.0" prefHeight="96.0" prefWidth="698.0" spacing="10.0">
+                     <children>
+                        <Button graphicTextGap="16.0" maxHeight="97.0" mnemonicParsing="false" opacity="0.65" prefHeight="96.0" prefWidth="173.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Home" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                        <Button graphicTextGap="16.0" mnemonicParsing="false" onAction="#switchToMonthlySum" prefHeight="96.0" prefWidth="262.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Monthly summary" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M19 2h-4.18C14.4.84 13.3 0 12 0S9.6.84 9.18 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 18H6c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1h1v1c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V4h1c.55 0 1 .45 1 1v14c0 .55-.45 1-1 1z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                        <Button graphicTextGap="16.0" layoutX="83.0" mnemonicParsing="false" onAction="#switchToMembership" opacity="0.65" prefHeight="97.0" prefWidth="214.0" styleClass="navbar-button" stylesheets="@stylesheet.css" text="Membership" textFill="WHITE">
+                           <font>
+                              <Font name="Angsana New" size="24.0" />
+                           </font>
+                           <graphic>
+                              <SVGPath content="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" fill="WHITE" scaleX="1.5" scaleY="1.5" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hmax="0.0" maxWidth="1362.0" pannable="true" prefHeight="872.0" prefWidth="1362.0" styleClass="menu-box" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="40.0" right="40.0" top="55.0" />
+               </BorderPane.margin>
+               <content>
+                  <HBox maxWidth="1362.0" minWidth="1362.0" prefHeight="574.0" prefWidth="1362.0">
+                     <children>
+                        <Pane prefHeight="521.0" prefWidth="543.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="43.0" layoutY="45.0" prefHeight="35.0" prefWidth="217.0" text="ยอดขายรวมประจำเดือน">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <HBox layoutX="43.0" layoutY="83.0" prefHeight="53.0" prefWidth="356.0" spacing="16.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="43.0" layoutY="83.0" prefHeight="53.0" prefWidth="166.0" text="พฤศจิกายน" fx:id="monthNameLabel">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="2555" fx:id="yearLabel">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <VBox layoutX="43.0" layoutY="168.0" prefHeight="409.0" prefWidth="480.0" spacing="8.0">
+                                 <children>
+                                    <HBox prefHeight="23.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="ยอดขายรวม">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="131.0" text="100" fx:id="totalUnitLabel">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="74.0" text="หน่วย">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="23.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="non-coffee">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="58.0" text="100" fx:id="nonUnitLabel">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="23.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="coffee" >
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="58.0" text="100" fx:id="coffeeUnitLabel">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="23.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="bakery">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="58.0" text="100" fx:id="bakeryUnitLabel">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="20.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="รายได้จากการขาย">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="131.0" text="100" fx:id="saleIncomeLabel">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="74.0" text="บาท">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="8.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="20.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="ต้นทุนสินค้า">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="131.0" text="100" fx:id="saleCostLabel">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="74.0" text="บาท">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="20.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="ค่าเช่าตึก">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="131.0" text="100" fx:id="rentalCostLabel">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="74.0" text="บาท">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="20.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="เงินเดือนพนักงาน">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="131.0" text="100" fx:id="salaryLabel">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="74.0" text="บาท">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="20.0" prefWidth="480.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="276.0" text="กำไรสุทธิ">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="131.0" text="100" underline="true" fx:id="netTotalLabel">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="35.0" prefWidth="74.0" text="บาท">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <ComboBox layoutX="272.0" layoutY="38.0" prefHeight="36.0" prefWidth="105.0" />
+                           </children>
+                        </Pane>
+                        <LineChart prefHeight="552.0" prefWidth="820.0" fx:id="chart">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

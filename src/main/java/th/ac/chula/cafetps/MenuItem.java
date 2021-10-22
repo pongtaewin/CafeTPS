@@ -26,7 +26,8 @@ public class MenuItem {
                 coffeeMenu.get(tempArrayCoffee.indexOf(temp.getName())).addAvailableProperty(temp.getProperty());
             }else if(temp.getCategory()==itemCategory.NONCOFFEE){
                 if(!tempArrayNon.contains(temp.getName())) {
-                    nonCoffeeMenu.add(new PickItem(temp.getName(), true));
+                    if(temp.getId()==33) nonCoffeeMenu.add(new PickItem(temp.getName(), false));
+                    else nonCoffeeMenu.add(new PickItem(temp.getName(), true));
                     tempArrayNon.add(temp.getName());
                 }
                 nonCoffeeMenu.get(tempArrayNon.indexOf(temp.getName())).addAvailableProperty(temp.getProperty());
