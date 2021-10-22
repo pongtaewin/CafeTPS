@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import th.ac.chula.cafetps.Utility;
 import th.ac.chula.cafetps.model.Member;
 import th.ac.chula.cafetps.PickItem;
 
@@ -64,7 +65,7 @@ public class HomeController extends SwitchController {
             alertmsg.setText("กรุุณากรอกหมายเลขให้ถูกต้อง");
         }
         if (member != null) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/test_order.fxml"));
+                FXMLLoader loader = Utility.loadResource(getClass(),"test_order");
                 root = loader.load();
                 HomeOrderController homeOrderController = loader.getController();
                 homeOrderController.setHelper(helper);

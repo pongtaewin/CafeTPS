@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import th.ac.chula.cafetps.Helper;
+import th.ac.chula.cafetps.Utility;
 import th.ac.chula.cafetps.model.User;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -42,7 +43,7 @@ public class LoginController {
         }else{
             employee = new User(username,password);
             if(helper.login(employee)){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/th/ac/chula/cafetps/home.fxml"));
+                FXMLLoader loader = Utility.loadResource(getClass(),"home");
                 root = loader.load();
                 HomeController homeController = loader.getController();
                 homeController.setHelper(helper);
