@@ -219,7 +219,7 @@ public class HomeOrderController extends SwitchController{
                         // TODO : Refactor Code
                         AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
                         controller.addButton.setOnMouseClicked((MouseEvent e) ->{
-                            if(controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null){
+                            if( controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null ){
                                 controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
                             }else{
                                 Item item = new Item(cardController.pickItem.getName(),controller.getPropertyFromBox(),controller.getQuantity(),controller.getSweetness());
@@ -256,7 +256,16 @@ public class HomeOrderController extends SwitchController{
                     try {
                         AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
                         controller.addButton.setOnMouseClicked((MouseEvent e) ->{
-                            if(controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null){
+                            if(cardController.pickItem.getName().equals("อิตาเลี่ยนโซดา")){
+                                if(controller.propertyBox.getValue()==null) controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
+                                else{
+                                Item item = new Item(cardController.pickItem.getName(), controller.getPropertyFromBox(), controller.getQuantity(),"");
+                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(), item.getProperty()));
+                                addItem(item);
+                                addPopupStage.close();
+                                }
+                            }
+                            else if((controller.propertyBox.getValue()==null || controller.sweetnessBox.getValue()==null)){
                                 controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
                             }else {
                                 Item item = new Item(cardController.pickItem.getName(), controller.getPropertyFromBox(), controller.getQuantity(), controller.getSweetness());
