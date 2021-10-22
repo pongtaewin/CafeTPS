@@ -19,7 +19,6 @@ import java.util.Calendar;
 public class Helper {
 
     // don't forget to change path
-    public static final  String DATABASE_NAME = "jdbc:sqlite:/D:\\sqlite3\\Cafe.sqlite";
     private ArrayList<ItemRecord> records;
     private PriceTable priceTable;
 
@@ -35,7 +34,7 @@ public class Helper {
     private Connection connect(){
         Connection connection = null;
         try{
-            connection = DriverManager.getConnection(DATABASE_NAME);
+            connection = DriverManager.getConnection(Constants.DATABASE_NAME);
         }catch (SQLException e){
             e.printStackTrace();
         }
