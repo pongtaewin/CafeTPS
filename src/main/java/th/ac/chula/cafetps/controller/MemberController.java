@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import th.ac.chula.cafetps.DatabaseHelper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,7 +54,7 @@ public class MemberController extends SwitchController {
         if(phoneMatcher.matches()){
             if(!name.equals("")){
                 if(DOBmatcher.matches()){
-                    helper.addMember(m_id,name,gender,dob);
+                    DatabaseHelper.addMember(m_id,name,gender,dob);
                     alertmsg.setTextFill(Color.GREEN);
                     alertmsg.setText("สมัครสมาชิกเสร็จสิ้น");
                 }else alertmsg.setText("กรุณากรอกวันเกิดให้ถูกต้อง");
