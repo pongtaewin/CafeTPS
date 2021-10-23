@@ -75,12 +75,25 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>15</source>
-                    <target>15</target>
-                </configuration>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Main-Class>th.ac.chula.cafetps.Start</Main-Class>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -91,12 +104,25 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>th.ac.chula.cafetps.cafetps/th.ac.chula.cafetps.CafeTPSApplication
+                            <mainClass>th.ac.chula.cafetps.cafetps/th.ac.chula.cafetps.Start
                             </mainClass>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>15</source>
+                <target>15</target>
+                <compilerArgs>
+                    <arg>--add-exports</arg>
+                    <arg>javafx.controls/com.sun.javafx.charts=ALL-UNNAMED,th.ac.chula.cafetps</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
         </plugins>
     </build>
 </project>
