@@ -51,7 +51,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ComboBox fx:id="selectorBox" onAction="#changeData" layoutX="1221.0" layoutY="24.0" prefHeight="55.0" prefWidth="170.0" />
+                  <ComboBox fx:id="selectorBox" onAction="#updateGraph" layoutX="1221.0" layoutY="24.0" prefHeight="55.0" prefWidth="170.0" />
                </children>
             </Pane>
          </top>

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import th.ac.chula.cafetps.DatabaseHelper;
 import th.ac.chula.cafetps.Helper;
 import th.ac.chula.cafetps.Utility;
 import th.ac.chula.cafetps.model.User;
@@ -42,7 +43,7 @@ public class LoginController {
             alertmsg.setText("กรุณากรอกชื่อผู้ใช้งานและรหัสผ่าน");
         }else{
             employee = new User(username,password);
-            if(helper.login(employee)){
+            if(DatabaseHelper.login(employee)){
                 FXMLLoader loader = Utility.loadResource(getClass(),"home");
                 root = loader.load();
                 HomeController homeController = loader.getController();

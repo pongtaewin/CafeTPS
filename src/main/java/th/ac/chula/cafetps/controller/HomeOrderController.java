@@ -29,6 +29,10 @@ import java.util.ArrayList;
 
 public class HomeOrderController extends SwitchController{
 
+    /***
+     * TODO: Refactor this part of code.
+     */
+
 
     @FXML
     private Label memberName;
@@ -94,7 +98,7 @@ public class HomeOrderController extends SwitchController{
         //add cell of button edit
         Callback<TableColumn<Item, String>, TableCell<Item, String>> cellFactory = (TableColumn<Item, String> param) -> {
             // make cell containing buttons
-            final TableCell<Item, String> cell = new TableCell<Item, String>() {
+            final TableCell<Item, String> cell = new TableCell<>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -106,14 +110,14 @@ public class HomeOrderController extends SwitchController{
                         SVGPath deleteIcon = new SVGPath();
                         deleteIcon.setContent(deletePath);
                         deleteIcon.setStyle(" -fx-cursor: hand ;"
-                                        + "-glyph-size:24px;"
-                                        + "-fx-fill:#FF0000;"
-                                        + "-fx-opacity: 54%;");
+                                + "-glyph-size:24px;"
+                                + "-fx-fill:#FF0000;"
+                                + "-fx-opacity: 54%;");
 
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
                             Item selectedItem = receiptTable.getSelectionModel().getSelectedItem();
                             receiptTable.getItems().remove(selectedItem);
-                            totalPrice.setText(getTotal()+"");
+                            totalPrice.setText(getTotal() + "");
                         });
 
                         setGraphic(deleteIcon);
@@ -127,19 +131,14 @@ public class HomeOrderController extends SwitchController{
             return cell;
         };
 
-        nameItemCol.setCellFactory(new Callback<TableColumn<Item, String>, TableCell<Item, String>>() {
-
-            @Override
-            public TableCell<Item, String> call(
-                    TableColumn<Item, String> param) {
-                TableCell<Item, String> cell = new TableCell<>();
-                Text text = new Text();
-                cell.setGraphic(text);
-                cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
-                text.wrappingWidthProperty().bind(cell.widthProperty());
-                text.textProperty().bind(cell.itemProperty());
-                return cell ;
-            }
+        nameItemCol.setCellFactory(param -> {
+            TableCell<Item, String> cell = new TableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+            text.wrappingWidthProperty().bind(cell.widthProperty());
+            text.textProperty().bind(cell.itemProperty());
+            return cell ;
         });
 
         sweetnessCol.setResizable(false);
@@ -151,19 +150,10 @@ public class HomeOrderController extends SwitchController{
         sweetnessCol.setStyle("-fx-font-size: 14px;");
         editCol.setCellFactory(cellFactory);
         receiptTable.setItems(receiptShow);
-        receiptTable.widthProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> source, Number oldWidth, Number newWidth)
-            {
-                TableHeaderRow header = (TableHeaderRow) receiptTable.lookup("TableHeaderRow");
-                header.reorderingProperty().addListener(new ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        header.setReordering(false);
-                    }
-                });
-            }
+        receiptTable.widthProperty().addListener((source, oldWidth, newWidth) -> {
+            TableHeaderRow header = (TableHeaderRow) receiptTable.lookup("TableHeaderRow");
+            header.reorderingProperty().addListener(
+                    (observable, oldValue, newValue) -> header.setReordering(false));
         });
 
         totalPrice.setText(getTotal()+"");
@@ -356,7 +346,7 @@ public class HomeOrderController extends SwitchController{
                 payPopup.setScene(pay1Scene);
                 payFirstController.next.setOnMouseClicked((MouseEvent event) -> {
                     String temp = payFirstController.getMoneyField.getText();
-                    if(temp.equals("")||!helper.isNumeric(temp)){
+                    if(temp.equals("")||!DatabaseHelper.isNumeric(temp)){
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.getDialogPane().getStylesheets().add(Utility.loadStyleSheet(getClass()));
                         alert.setContentText("กรุณากรอกจำนวนเงิน");

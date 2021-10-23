@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import th.ac.chula.cafetps.DatabaseHelper;
 import th.ac.chula.cafetps.Utility;
 import th.ac.chula.cafetps.model.Member;
 import th.ac.chula.cafetps.PickItem;
@@ -59,7 +60,7 @@ public class HomeController extends SwitchController {
         if (phoneNum.equals("")) {
             member = new Member("0", "guest", 0);
         } else if (matcher.matches()) {
-            member = helper.memberCheck(phoneNum);
+            member = DatabaseHelper.memberCheck(phoneNum);
             if (member == null) alertmsg.setText("ไม่พบหมายเลขสมาชิก");
         } else {
             alertmsg.setText("กรุุณากรอกหมายเลขให้ถูกต้อง");
