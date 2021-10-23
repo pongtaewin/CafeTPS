@@ -139,7 +139,8 @@ public class MonthController extends SwitchController {
         chart.setAnimated(true);
 
         chart.getChildrenUnmodifiable().stream()
-                .filter(n -> n instanceof Legend).map(n -> (Legend) n)
+                .filter(Legend.class::isInstance)
+                .map(Legend.class::cast)
                 .flatMap(l -> l.getItems().stream())
                 .map(li -> chart.getData().stream()
                         .filter(s -> s.getName().equals(li.getText())).findFirst()
