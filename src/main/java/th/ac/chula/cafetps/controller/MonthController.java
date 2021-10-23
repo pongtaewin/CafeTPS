@@ -1,5 +1,6 @@
 package th.ac.chula.cafetps.controller;
 
+import com.sun.javafx.charts.Legend;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -10,17 +11,22 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
+import th.ac.chula.cafetps.SummaryHelper;
 
 import java.time.YearMonth;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import com.sun.javafx.charts.Legend;
 import javafx.util.Pair;
 import th.ac.chula.cafetps.constants.ItemCategory;
 import th.ac.chula.cafetps.helper.SummaryHelper;
 
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.HashMap;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MonthController extends SwitchController {
 
@@ -122,7 +128,7 @@ public class MonthController extends SwitchController {
     }
 
     public void refreshChart(){
-        HashMap<String,ArrayList<XYChart.Data<String,Integer>>> values = SummaryHelper.getChartData(selectorBox.getValue());
+        HashMap<String, ArrayList<XYChart.Data<String,Integer>>> values = SummaryHelper.getChartData(selectorBox.getValue());
 
         chart.getData().add(getMockLine(YearMonth.parse(selectorBox.getValue())));
         chart.getData().add(getDataLine(values.get("bakery"),"Bakery"));
@@ -177,10 +183,17 @@ public class MonthController extends SwitchController {
 
     private void updateSellUnit(){
         HashMap<String,Integer> values = SummaryHelper.getSellUnit(selectorBox.getValue());
+        int[] v = IntStream.of(values.get("bakery"),
+                        values.get("coffee"),
+                        values.get("noncoffee"))
+                .toArray();
+
         formatLabelText(bakeryUnitLabel,values.get("bakery"));
         formatLabelText(coffeeUnitLabel,values.get("coffee"));
         formatLabelText(nonUnitLabel,values.get("noncoffee"));
-        formatLabelText(totalUnitLabel,values.get("bakery") + values.get("coffee") + values.get("noncoffee"));
+        formatLabelText(totalUnitLabel,values.get("bakery")
+                + values.get("coffee")
+                + values.get("noncoffee"));
     }
 
     private void updateIncomeCostProfit(){
