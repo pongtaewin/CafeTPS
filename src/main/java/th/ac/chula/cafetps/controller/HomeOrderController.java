@@ -1,7 +1,5 @@
 package th.ac.chula.cafetps.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +19,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import th.ac.chula.cafetps.*;
 import th.ac.chula.cafetps.MenuItem;
+import th.ac.chula.cafetps.constants.ItemProperty;
+import th.ac.chula.cafetps.helper.DatabaseHelper;
 import th.ac.chula.cafetps.model.Item;
 import th.ac.chula.cafetps.model.Member;
 

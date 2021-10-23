@@ -15,4 +15,8 @@ module th.ac.chula.cafetps {
     exports th.ac.chula.cafetps.controller;
     exports th.ac.chula.cafetps.model;
     opens th.ac.chula.cafetps.model to javafx.fxml;
+    exports th.ac.chula.cafetps.constants;
+    opens th.ac.chula.cafetps.constants to javafx.fxml;
+    exports th.ac.chula.cafetps.helper;
+    opens th.ac.chula.cafetps.helper to javafx.fxml;
 }

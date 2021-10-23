@@ -172,8 +172,8 @@
                                                       <Label layoutX="43.0" layoutY="45.0" prefHeight="45.0" prefWidth="336.0" styleClass="normal-label" text="ข้อมูลเกี่ยวกับสมาชิกประจำเดือน" />
                                                       <HBox layoutX="43.0" layoutY="83.0" prefHeight="53.0" prefWidth="356.0" spacing="16.0">
                                                          <children>
-                                                            <Label fx:id="monthNameLabel1" layoutX="43.0" layoutY="83.0" prefHeight="53.0" prefWidth="220.0" styleClass="month-label" text="พฤศจิกายน" />
-                                                            <Label fx:id="yearLabel1" alignment="BOTTOM_LEFT" prefHeight="63.0" prefWidth="94.0" styleClass="year-label" text="2555" />
+                                                            <Label fx:id="monthNameLabel2" layoutX="43.0" layoutY="83.0" prefHeight="53.0" prefWidth="220.0" styleClass="month-label" text="พฤศจิกายน" />
+                                                            <Label fx:id="yearLabel2" alignment="BOTTOM_LEFT" prefHeight="63.0" prefWidth="94.0" styleClass="year-label" text="2555" />
                                                          </children>
                                                       </HBox>
                                                       <VBox layoutX="43.0" layoutY="168.0" prefHeight="279.0" prefWidth="565.0" spacing="24.0">
@@ -181,14 +181,14 @@
                                                             <HBox prefHeight="35.0" prefWidth="547.0">
                                                                <children>
                                                                   <Label prefHeight="35.0" prefWidth="430.0" styleClass="normal-label" text="จำนวนสมาชิกใหม่ในเดือนนี้" />
-                                                                  <Label fx:id="totalUnitLabel1" alignment="BOTTOM_LEFT" prefHeight="66.0" prefWidth="131.0" styleClass="normal-number-label" text="0" />
+                                                                  <Label fx:id="newMemberInThisMonth" alignment="BOTTOM_LEFT" prefHeight="66.0" prefWidth="131.0" styleClass="normal-number-label" text="0" />
                                                                   <Label prefHeight="35.0" prefWidth="74.0" styleClass="normal-label" text="คน" />
                                                                </children>
                                                             </HBox>
                                                             <HBox prefHeight="20.0" prefWidth="480.0">
                                                                <children>
                                                                   <Label prefHeight="35.0" prefWidth="409.0" styleClass="normal-label" text="จำนวนครั้งที่สมาชิกใหม่เข้าใช้บริการ" />
-                                                                  <Label fx:id="saleIncomeLabel1" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
+                                                                  <Label fx:id="newMemberEngagement" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
                                                                   <Label prefHeight="45.0" prefWidth="59.0" styleClass="normal-label" text="ครั้ง" />
                                                                </children>
                                                                <VBox.margin>
@@ -198,21 +198,21 @@
                                                             <HBox prefHeight="20.0" prefWidth="480.0">
                                                                <children>
                                                                   <Label prefHeight="35.0" prefWidth="409.0" styleClass="normal-label" text="กำไรจากสมาชิกใหม่" />
-                                                                  <Label fx:id="saleIncomeLabel11" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
+                                                                  <Label fx:id="profitFromNewMember" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
                                                                   <Label prefHeight="35.0" prefWidth="50.0" styleClass="normal-label" text="บาท" />
                                                                </children>
                                                             </HBox>
                                                             <HBox prefHeight="20.0" prefWidth="480.0">
                                                                <children>
                                                                   <Label prefHeight="35.0" prefWidth="409.0" styleClass="normal-label" text="กำไรจากสมาชิก" />
-                                                                  <Label fx:id="saleIncomeLabel111" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
+                                                                  <Label fx:id="profitFromMember" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
                                                                   <Label prefHeight="35.0" prefWidth="50.0" styleClass="normal-label" text="บาท" />
                                                                </children>
                                                             </HBox>
                                                             <HBox prefHeight="20.0" prefWidth="480.0">
                                                                <children>
                                                                   <Label prefHeight="35.0" prefWidth="409.0" styleClass="normal-label" text="กำไรจากผู้ที่ไม่เป็นสมาชิก" />
-                                                                  <Label fx:id="saleIncomeLabel112" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
+                                                                  <Label fx:id="profitFromGuest" prefHeight="35.0" prefWidth="108.0" styleClass="normal-number-label" text="100" />
                                                                   <Label prefHeight="35.0" prefWidth="50.0" styleClass="normal-label" text="บาท" />
                                                                </children>
                                                             </HBox>

@@ -1,7 +1,7 @@
 package th.ac.chula.cafetps.model;
 
-import th.ac.chula.cafetps.ItemCategory;
-import th.ac.chula.cafetps.ItemProperty;
+import th.ac.chula.cafetps.constants.ItemCategory;
+import th.ac.chula.cafetps.constants.ItemProperty;
 
 public class ItemRecord {
     private int id;

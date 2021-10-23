@@ -24,6 +24,4 @@ public class RecentCardController {
         this.item = item;
     }
 
-
-
 }

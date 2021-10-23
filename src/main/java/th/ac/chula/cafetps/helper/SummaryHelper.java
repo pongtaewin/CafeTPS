@@ -1,6 +1,7 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.helper;
 
 import javafx.scene.chart.XYChart;
+import th.ac.chula.cafetps.constants.ItemCategory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -130,5 +131,112 @@ public class SummaryHelper {
             e.printStackTrace();
         }
         return data;
+    }
+
+    public static String[] getBestSellerInMonth(ItemCategory categoryConstant,String yearAndMonth){
+        String[] data = null;
+        String category = categoryConverter(categoryConstant);
+        Connection connection = DatabaseHelper.connect();
+        String sql = """
+                select item_name,max(qty) from (select item_name,category,sum(amount) as qty from Receipt_Detail
+                inner join Item
+                on Receipt_Detail.item_id = Item.item_id
+                where category = ? and Receipt_Detail.r_id in (select r_id from Receipt where strftime('%Y-%m',create_date)  = ?)
+                group by item_name);
+                """;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,category);
+            preparedStatement.setString(2,yearAndMonth);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            data = new String[] {resultSet.getString(1), resultSet.getString(2)};
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public static String profitFromMember(String yearAndMonth){
+        String profit = "";
+        Connection connection = DatabaseHelper.connect();
+        String sql = """
+                    select sum(profit) as sale_profit from (select (priceperunit - costperunit) * amount as profit from Item
+                    inner join (select Receipt_Detail.r_id,m_id,item_id as id,amount from Receipt_Detail
+                    inner join (select * from Receipt where strftime('%Y-%m',create_date)  = ?) as temp
+                    on Receipt_Detail.r_id = temp.r_id
+                    where m_id not in (select m_id from Member
+                    where cast((julianday('now')-julianday(join_date))/30 as integer) <= 3)) as right
+                    on Item.item_id = right.id);
+                """;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,yearAndMonth);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            profit = resultSet.getString(1);
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return profit==null ? "0":profit;
+    }
+
+    public static String profitFromNewMember(String yearAndMonth){
+        String profit = "";
+        Connection connection = DatabaseHelper.connect();
+        String sql = """
+                    select sum(profit) as sale_profit from (select (priceperunit - costperunit) * amount as profit from Item
+                    inner join (select Receipt_Detail.r_id,m_id,item_id as id,amount from Receipt_Detail
+                    inner join (select * from Receipt where strftime('%Y-%m',create_date)  = ?) as temp
+                    on Receipt_Detail.r_id = temp.r_id
+                    where m_id  in (select m_id from Member where cast((julianday('now')-julianday(join_date))/30 as integer) <= 3)) as right
+                    on Item.item_id = right.id);
+                """;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,yearAndMonth);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            profit = resultSet.getString(1);
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return profit==null ? "0":profit;
+    }
+
+    public static String profitFromGuest(String yearAndMonth){
+        String profit = "";
+        Connection connection = DatabaseHelper.connect();
+        String sql = """
+                    select sum(profit) as sale_profit from (select (priceperunit - costperunit) * amount as profit from Item
+                    inner join (select Receipt_Detail.r_id,m_id,item_id as id,amount from Receipt_Detail
+                    inner join (select * from Receipt where strftime('%Y-%m',create_date)  = ?) as temp
+                    on Receipt_Detail.r_id = temp.r_id
+                    where m_id ="0") as right
+                    on Item.item_id = right.id);
+                """;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,yearAndMonth);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            profit = resultSet.getString(1);
+            connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return profit==null ? "0":profit;
+    }
+
+    private static String categoryConverter(ItemCategory category){
+        switch (category){
+            case BAKERY -> {return "bakery";}
+            case COFFEE -> {return "coffee";}
+            case NONCOFFEE -> {return "noncoffee";}
+            default -> {return null;}
+        }
     }
 }

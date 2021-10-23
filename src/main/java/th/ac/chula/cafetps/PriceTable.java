@@ -1,5 +1,7 @@
 package th.ac.chula.cafetps;
 
+import th.ac.chula.cafetps.constants.ItemProperty;
+
 import java.util.HashMap;
 
 public class PriceTable {

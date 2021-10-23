@@ -1,7 +1,8 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.helper;
 
 import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
+import th.ac.chula.cafetps.PriceTable;
+import th.ac.chula.cafetps.helper.DatabaseHelper;
 import th.ac.chula.cafetps.model.Item;
 import th.ac.chula.cafetps.model.ItemRecord;
 import th.ac.chula.cafetps.model.Member;
@@ -9,9 +10,6 @@ import th.ac.chula.cafetps.model.User;
 
 import java.sql.*;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
-import java.util.stream.Stream;
 
 public class Helper {
 
