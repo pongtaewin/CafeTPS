@@ -1,4 +1,4 @@
-package th.ac.chula.cafetps.controller;
+package th.ac.chula.cafetps.controller.page;
 
 
 import javafx.event.ActionEvent;
@@ -55,7 +55,7 @@ public class HomeController extends SwitchController {
                 FXMLLoader loader = Utility.loadResource(getClass(),"home_order");
                 root = loader.load();
                 HomeOrderController homeOrderController = loader.getController();
-                homeOrderController.setHelper(helper);
+                homeOrderController.setHelper(databaseManager);
                 homeOrderController.setMember(member);
                 homeOrderController.setEmployee(employee);
                 homeOrderController.setStage(stage);

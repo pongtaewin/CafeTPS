@@ -4,10 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import th.ac.chula.cafetps.Utility;
 
 public class PayFirstController {
     @FXML
-    private Label amount;
+    private Label amountLabel;
 
     @FXML
     public TextField getMoneyField;
@@ -17,6 +18,6 @@ public class PayFirstController {
 
 
     public void setAmount(int amt){
-        amount.setText(amt+"");
+        Utility.formatLabelText(amountLabel,amt);
     }
 }

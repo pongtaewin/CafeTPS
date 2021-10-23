@@ -215,7 +215,7 @@ public class SummaryHelper {
                     inner join (select Receipt_Detail.r_id,m_id,item_id as id,amount from Receipt_Detail
                     inner join (select * from Receipt where strftime('%Y-%m',create_date)  = ?) as temp
                     on Receipt_Detail.r_id = temp.r_id
-                    where m_id ="0") as right
+                    where m_id = "0") as right
                     on Item.item_id = right.id);
                 """;
         try {

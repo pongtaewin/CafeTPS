@@ -10,9 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import th.ac.chula.cafetps.helper.DatabaseHelper;
-import th.ac.chula.cafetps.helper.Helper;
 import th.ac.chula.cafetps.Utility;
+import th.ac.chula.cafetps.controller.page.HomeController;
+import th.ac.chula.cafetps.helper.DatabaseHelper;
+import th.ac.chula.cafetps.helper.DatabaseManager;
 import th.ac.chula.cafetps.model.User;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -28,7 +29,7 @@ public class LoginController {
     @FXML
     private Label alertmsg;
 
-    private Helper helper = new Helper();
+    private DatabaseManager databaseManager = new DatabaseManager();
     private User employee;
 
     private Stage stage;
@@ -47,7 +48,7 @@ public class LoginController {
                 FXMLLoader loader = Utility.loadResource(getClass(),"home");
                 root = loader.load();
                 HomeController homeController = loader.getController();
-                homeController.setHelper(helper);
+                homeController.setHelper(databaseManager);
                 homeController.setEmployee(employee);
                 homeController.setStage(getStage());
                 stage = (Stage) ((Node)event.getSource()).getScene().getWindow();

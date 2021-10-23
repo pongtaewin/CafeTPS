@@ -1,8 +1,9 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.model;
 
 import th.ac.chula.cafetps.constants.ItemProperty;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class PickItem {
@@ -17,9 +18,14 @@ public class PickItem {
         this.pickSweetness = pickSweetness;
     }
 
-    public PickItem(String name, ItemProperty availableProperty, boolean pickSweetness) {
+    public PickItem(String name, boolean pickSweetness, ItemProperty availableProperty) {
         this(name, pickSweetness);
         this.availableProperty.add(availableProperty);
+    }
+
+    public PickItem(String name, boolean pickSweetness, Collection<ItemProperty> availableProperties) {
+        this(name, pickSweetness);
+        this.availableProperty.addAll(availableProperties);
     }
 
     public void addAvailableProperty(ItemProperty type){

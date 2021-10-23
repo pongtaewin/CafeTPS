@@ -1,4 +1,4 @@
-package th.ac.chula.cafetps.controller;
+package th.ac.chula.cafetps.controller.page;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,19 +10,24 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import th.ac.chula.cafetps.*;
-import th.ac.chula.cafetps.MenuItem;
+import th.ac.chula.cafetps.CafeTPSApplication;
+import th.ac.chula.cafetps.Utility;
 import th.ac.chula.cafetps.constants.ItemProperty;
+import th.ac.chula.cafetps.controller.*;
 import th.ac.chula.cafetps.helper.DatabaseHelper;
 import th.ac.chula.cafetps.model.Item;
 import th.ac.chula.cafetps.model.Member;
+import th.ac.chula.cafetps.model.MenuItem;
+import th.ac.chula.cafetps.model.PickItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -161,7 +166,7 @@ public class HomeOrderController extends SwitchController{
 
     public void init(){
 //        member = helper.memberCheck("0842053668");
-        MenuItem temp = new MenuItem(helper,member);
+        MenuItem temp = new MenuItem(databaseManager,member);
         ArrayList<Item> recentOrder = temp.getRecentOrder();
         int column = 0;
         int row = 1;
@@ -180,7 +185,7 @@ public class HomeOrderController extends SwitchController{
                         recentGrid.add(pane, i, 1); //(child,column,row)
                         pane.setOnMouseClicked((MouseEvent event) -> {
                             Item item = recentCardController.item;
-                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(),item.getProperty()));
+                            item.setPricePerUnit(databaseManager.getPriceTable().getPrice(item.getName(),item.getProperty()));
                             addItem(recentCardController.item);
                         });
                     }
@@ -213,7 +218,7 @@ public class HomeOrderController extends SwitchController{
                                 controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
                             }else{
                                 Item item = new Item(cardController.pickItem.getName(),controller.getPropertyFromBox(),controller.getQuantity(),controller.getSweetness());
-                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(),item.getProperty()));
+                                item.setPricePerUnit(databaseManager.getPriceTable().getPrice(item.getName(),item.getProperty()));
                                 addItem(item);
                                 addPopupStage.close();
                             }
@@ -250,7 +255,7 @@ public class HomeOrderController extends SwitchController{
                                 if(controller.propertyBox.getValue()==null) controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
                                 else{
                                 Item item = new Item(cardController.pickItem.getName(), controller.getPropertyFromBox(), controller.getQuantity(),"");
-                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(), item.getProperty()));
+                                item.setPricePerUnit(databaseManager.getPriceTable().getPrice(item.getName(), item.getProperty()));
                                 addItem(item);
                                 addPopupStage.close();
                                 }
@@ -259,7 +264,7 @@ public class HomeOrderController extends SwitchController{
                                 controller.alertmsg.setText("กรุณาเลือกข้อมูลให้ครบถ้วน");
                             }else {
                                 Item item = new Item(cardController.pickItem.getName(), controller.getPropertyFromBox(), controller.getQuantity(), controller.getSweetness());
-                                item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(), item.getProperty()));
+                                item.setPricePerUnit(databaseManager.getPriceTable().getPrice(item.getName(), item.getProperty()));
                                 addItem(item);
                                 addPopupStage.close();
                             }
@@ -292,7 +297,7 @@ public class HomeOrderController extends SwitchController{
                         AddItemController controller = getPopupStage(loader,addPopupStage,cardController);
                         controller.addButton.setOnMouseClicked((MouseEvent e) ->{
                             Item item = new Item(cardController.pickItem.getName(), ItemProperty.NONE,controller.getQuantity(),"");
-                            item.setPricePerUnit(helper.getPriceTable().getPrice(item.getName(),item.getProperty()));
+                            item.setPricePerUnit(databaseManager.getPriceTable().getPrice(item.getName(),item.getProperty()));
                             addItem(item);
                             addPopupStage.close();
                         });
@@ -367,16 +372,16 @@ public class HomeOrderController extends SwitchController{
                     }
                 });
                 paySecondController.submit.setOnMouseClicked((MouseEvent event) -> {
-                    helper.insertReceipt(employee,member,getTotal());
-                    helper.insertReceiptDetail(receiptShow);
+                    databaseManager.insertReceipt(employee,member,getTotal());
+                    databaseManager.insertReceiptDetail(receiptShow);
                     member.setPoints(member.getPoints()+paySecondController.getPoint());
-                    helper.updatePoint(member);
+                    databaseManager.updatePoint(member);
                     payPopup.close();
                     FXMLLoader loader = Utility.loadResource(getClass(),"home");;
                     try{
                         root = loader.load();
                         HomeController homeController = loader.getController();
-                        homeController.setHelper(helper);
+                        homeController.setHelper(databaseManager);
                         homeController.setEmployee(employee);
                         scene = new Scene(root);
                         stage.setScene(scene);

@@ -7,7 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import th.ac.chula.cafetps.PickItem;
+import th.ac.chula.cafetps.model.PickItem;
 import th.ac.chula.cafetps.constants.ItemProperty;
 
 public class AddItemController {

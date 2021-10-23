@@ -1,4 +1,4 @@
-package th.ac.chula.cafetps.controller;
+package th.ac.chula.cafetps.controller.page;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

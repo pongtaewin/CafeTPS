@@ -2,7 +2,7 @@ package th.ac.chula.cafetps.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import th.ac.chula.cafetps.PickItem;
+import th.ac.chula.cafetps.model.PickItem;
 
 public class CardController {
 

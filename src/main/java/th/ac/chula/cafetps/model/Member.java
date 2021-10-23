@@ -1,23 +1,30 @@
 package th.ac.chula.cafetps.model;
 
+import java.util.Optional;
+
 public class Member {
 
-    private String ID;
+    private Optional<String> ID;
     private String name;
     private double points;
 
-    public Member(String ID, String name, double points) {
-        this.ID = ID;
+    public Member(String name, double points){
         this.name = name;
         this.points = points;
     }
 
-    public String getID() {
+    public Member(String ID, String name, double points) {
+        this.ID = Optional.of(ID);
+        this.name = name;
+        this.points = points;
+    }
+
+    public Optional<String> getID() {
         return ID;
     }
 
     public void setID(String ID) {
-        this.ID = ID;
+        this.ID = Optional.of(ID);
     }
 
     public String getName() {

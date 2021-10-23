@@ -1,4 +1,4 @@
-package th.ac.chula.cafetps.controller;
+package th.ac.chula.cafetps.controller.page;
 
 import com.sun.javafx.charts.Legend;
 import javafx.collections.FXCollections;
@@ -12,21 +12,15 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
-import th.ac.chula.cafetps.SummaryHelper;
-
-import java.time.YearMonth;
-import com.sun.javafx.charts.Legend;
-import javafx.util.Pair;
 import th.ac.chula.cafetps.constants.ItemCategory;
 import th.ac.chula.cafetps.helper.SummaryHelper;
 
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.HashMap;
-import java.util.Comparator;
-import java.util.Objects;
+import java.time.YearMonth;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static th.ac.chula.cafetps.Utility.formatLabelText;
 
 public class MonthController extends SwitchController {
 
@@ -175,6 +169,7 @@ public class MonthController extends SwitchController {
 
     private void updateSelectedMonth(){
         YearMonth ym = YearMonth.parse(selectorBox.getValue());
+
         monthNameLabel.setText(monthOf[ym.getMonthValue()-1]);
         monthNameLabel2.setText(monthOf[ym.getMonthValue()-1]);
         yearLabel.setText(String.valueOf(ym.getYear()));
@@ -244,11 +239,6 @@ public class MonthController extends SwitchController {
             }
         });
     }
-
-    private static void formatLabelText(Label label, Object value){
-        label.setText(value + " ");
-    }
-
 
 
 }

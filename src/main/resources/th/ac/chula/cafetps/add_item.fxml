@@ -62,7 +62,7 @@
          </children>
       </VBox>
       <Button fx:id="addButton" layoutY="425.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="326.0" styleClass="submit-button" text="เพิ่มรายการ" textFill="WHITE" />
-      <Label fx:id="alertmsg" alignment="CENTER" layoutY="380.0" maxWidth="326.0" prefHeight="30.0" prefWidth="326.0" styleClass="alert-msg" />
+      <Label fx:id="alertMsg" alignment="CENTER" layoutY="380.0" maxWidth="326.0" prefHeight="30.0" prefWidth="326.0" styleClass="alert-msg" />
    </children>
    <effect>
       <DropShadow />
