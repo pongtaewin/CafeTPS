@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="120.0" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" styleClass="card" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml" fx:controller="th.ac.chula.cafetps.controller.CardController">
+<AnchorPane maxHeight="120.0" maxWidth="120.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="120.0" styleClass="card" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.chula.cafetps.controller.CardController">
    <children>
-      <Label  fx:id="name" alignment="TOP_LEFT" layoutX="16.0" layoutY="22.0" prefHeight="91.0" prefWidth="90.0" text="label" textOverrun="CLIP" wrapText="true" />
+      <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="22.0" prefHeight="91.0" prefWidth="90.0" text="label" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
    </children>
 </AnchorPane>

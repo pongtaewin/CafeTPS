@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="326.0" style="-fx-background-color: #ffffff; -fx-border-color: #c4c4c4; -fx-border-width: 2;" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.chula.cafetps.controller.AddItemController">
    <children>
-      <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="95.0" layoutY="33.0" prefHeight="57.0" prefWidth="138.0" styleClass="pay-box" text="ชื่อ">
+      <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="33.0" prefHeight="57.0" prefWidth="238.0" styleClass="pay-box" text="ชื่อ">
          <font>
             <Font size="30.0" />
          </font>

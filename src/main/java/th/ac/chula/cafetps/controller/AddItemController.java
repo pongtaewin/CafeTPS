@@ -15,7 +15,7 @@ public class AddItemController {
     // TODO: Convert AddItemController into subclasses.
 
     @FXML
-    public Label alertmsg;
+    public Label alertMsg;
 
     @FXML
     private Label nameLabel;
@@ -24,7 +24,7 @@ public class AddItemController {
     public ChoiceBox<ItemProperty> propertyBox;
 
     @FXML
-    public ChoiceBox sweetnessBox;
+    public ChoiceBox<String> sweetnessBox;
 
     @FXML
     public TextField amountField;
@@ -43,7 +43,7 @@ public class AddItemController {
 
     public void setData(PickItem pickItem){
         nameLabel.setText(pickItem.getName());
-        alertmsg.setTextFill(Color.RED);
+        alertMsg.setTextFill(Color.RED);
         propertyBox.setItems(FXCollections.observableArrayList(pickItem.getAvailableProperty()));
         if (!pickItem.isPickSweetness()) sweetnessBox.setDisable(true);
         if(pickItem.getAvailableProperty().size()==0) propertyBox.setDisable(true);
@@ -56,7 +56,7 @@ public class AddItemController {
     }
 
     public ItemProperty getPropertyFromBox(){
-        return (ItemProperty) propertyBox.getValue();
+        return propertyBox.getValue();
     }
 
     public int getQuantity() {
@@ -64,7 +64,7 @@ public class AddItemController {
     }
 
     public String getSweetness(){
-        return sweetnessBox.getValue().toString();
+        return sweetnessBox.getValue();
     }
 
     public void plus(){

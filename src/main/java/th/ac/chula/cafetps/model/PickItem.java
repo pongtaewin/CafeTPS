@@ -32,6 +32,10 @@ public class PickItem {
         availableProperty.add(type);
     }
 
+    public void addAllAvailableProperty(Collection<ItemProperty> types){
+        availableProperty.addAll(types);
+    }
+
     public List<ItemProperty> getAvailableProperty() {
         return availableProperty;
     }
