@@ -1,7 +1,7 @@
 package th.ac.chula.cafetps.helper;
 
 import javafx.collections.ObservableList;
-import th.ac.chula.cafetps.PriceTable;
+import th.ac.chula.cafetps.model.PriceTable;
 import th.ac.chula.cafetps.helper.DatabaseHelper;
 import th.ac.chula.cafetps.model.Item;
 import th.ac.chula.cafetps.model.ItemRecord;
@@ -10,14 +10,16 @@ import th.ac.chula.cafetps.model.User;
 
 import java.sql.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class Helper {
+public class DatabaseManager {
 
     // don't forget to change path
     private final ArrayList<ItemRecord> records;
     private final PriceTable priceTable;
 
-    public Helper() {
+    public DatabaseManager() {
         this.records = DatabaseHelper.getItemRecord();
         this.priceTable = new PriceTable();
         for (ItemRecord record : records) {
@@ -25,18 +27,21 @@ public class Helper {
         }
     }
 
-    public ArrayList<Item> getRecentOrder(String phoneNumber){
-        ArrayList<Item> toReturn = new ArrayList<>();
+    public Optional<List<Item>> getRecentOrder(String phoneNumber){
         ResultSet result = DatabaseHelper.recentOrderQuery(phoneNumber);
         try{
-            Objects.requireNonNull(result);
-            while (result.next()){
-                toReturn.add(getItemFromID(result.getInt("item_id"),result.getInt("amount"),result.getString("sweetness")));
-            }
-        }catch (NullPointerException | SQLException e){
+            if(Objects.isNull(result)) return Optional.empty();
+            Stream.Builder<Item> bd = Stream.builder();
+            while (result.next())
+                bd.add(getItemFromID(
+                        result.getInt("item_id"),
+                        result.getInt("amount"),
+                        result.getString("sweetness")));
+            return Optional.of(bd.build().collect(Collectors.toList()));
+        }catch (SQLException e){
             e.printStackTrace();
         }
-        return toReturn;
+        return Optional.empty();
     }
 
     private Item getItemFromID(int id,int quantity,String sweetness){
@@ -72,7 +77,7 @@ public class Helper {
         String commandReceipt = "INSERT INTO Receipt VALUES(null,?,?,?,?)";
         try{
             PreparedStatement statement = connection.prepareStatement(commandReceipt);
-            statement.setString(1,member.getID());
+            statement.setString(1,member.getID().orElse("0"));
             statement.setString(2,employee.getUsername());
             statement.setInt(3,total);
             statement.setString(4,DatabaseHelper.getNow());
