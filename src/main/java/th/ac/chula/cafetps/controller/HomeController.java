@@ -9,16 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import th.ac.chula.cafetps.DatabaseHelper;
+import th.ac.chula.cafetps.helper.DatabaseHelper;
 import th.ac.chula.cafetps.Utility;
 import th.ac.chula.cafetps.model.Member;
-import th.ac.chula.cafetps.PickItem;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,18 +30,7 @@ public class HomeController extends SwitchController {
     @FXML
     private ScrollPane scrollPane;
 
-    @FXML
-    private GridPane coffeeGrid;
-
-    @FXML
-    private GridPane noncoffeeGrid;
-
-    @FXML
-    private GridPane bakeryGrid;
-
-
     private Member member;
-    private ArrayList<PickItem> data;
     private final String phoneCheck = "^0\\d{9}$";
     private final Pattern phonePattern = Pattern.compile(phoneCheck,Pattern.MULTILINE);
 
@@ -66,7 +52,7 @@ public class HomeController extends SwitchController {
             alertmsg.setText("กรุุณากรอกหมายเลขให้ถูกต้อง");
         }
         if (member != null) {
-                FXMLLoader loader = Utility.loadResource(getClass(),"test_order");
+                FXMLLoader loader = Utility.loadResource(getClass(),"home_order");
                 root = loader.load();
                 HomeOrderController homeOrderController = loader.getController();
                 homeOrderController.setHelper(helper);

@@ -1,5 +1,7 @@
 package th.ac.chula.cafetps;
 
+import th.ac.chula.cafetps.constants.ItemCategory;
+import th.ac.chula.cafetps.helper.Helper;
 import th.ac.chula.cafetps.model.Item;
 import th.ac.chula.cafetps.model.ItemRecord;
 import th.ac.chula.cafetps.model.Member;

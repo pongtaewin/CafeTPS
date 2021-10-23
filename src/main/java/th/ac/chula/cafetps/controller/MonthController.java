@@ -8,19 +8,18 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 
 import java.time.YearMonth;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.sun.javafx.charts.Legend;
 import javafx.util.Pair;
-import th.ac.chula.cafetps.SummaryHelper;
+import th.ac.chula.cafetps.constants.ItemCategory;
+import th.ac.chula.cafetps.helper.SummaryHelper;
 
 
 public class MonthController extends SwitchController {
@@ -68,10 +67,38 @@ public class MonthController extends SwitchController {
     private ComboBox<String> selectorBox;
 
     @FXML
-    private ScrollPane scrollPane; // TODO: Is this used? Delete if not...
+    private NumberAxis yaxis;
 
     @FXML
-    private NumberAxis yaxis;
+    private Label yearLabel2;
+
+    @FXML
+    private Label monthNameLabel2;
+
+    @FXML
+    private Label newMemberInThisMonth;
+
+    @FXML
+    private Label newMemberEngagement;
+
+    @FXML
+    private Label profitFromNewMember;
+
+    @FXML
+    private Label profitFromMember;
+
+    @FXML
+    private Label profitFromGuest;
+
+    @FXML
+    private Label bestSellerCoffee;
+
+    @FXML
+    private Label bestSellerNonCoffee;
+
+    @FXML
+    private Label bestSellerBakery;
+
 
     public static final String[] monthOf = new String[]{"มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"};
 
@@ -84,6 +111,8 @@ public class MonthController extends SwitchController {
         updateSelectedMonth();
         updateSellUnit();
         updateIncomeCostProfit();
+        updateBestSeller();
+        updateMemberAnalysis();
     }
 
     public void updateGraph(){
@@ -119,6 +148,19 @@ public class MonthController extends SwitchController {
                 .forEach(p -> prepareLegendToggle(p.getKey(), p.getValue()));
     }
 
+    private void updateMemberAnalysis(){
+        String yearMonth = selectorBox.getValue();
+        formatLabelText(profitFromMember,SummaryHelper.profitFromMember(yearMonth));
+        formatLabelText(profitFromNewMember,SummaryHelper.profitFromNewMember(yearMonth));
+        formatLabelText(profitFromGuest,SummaryHelper.profitFromGuest(yearMonth));
+    }
+    private void updateBestSeller(){
+        String yearMonth = selectorBox.getValue();
+        formatLabelText(bestSellerBakery,SummaryHelper.getBestSellerInMonth(ItemCategory.BAKERY,yearMonth)[0]);
+        formatLabelText(bestSellerCoffee,SummaryHelper.getBestSellerInMonth(ItemCategory.COFFEE,yearMonth)[0]);
+        formatLabelText(bestSellerNonCoffee,SummaryHelper.getBestSellerInMonth(ItemCategory.NONCOFFEE,yearMonth)[0]);
+    }
+
     private void initMonthSelection(){
         ArrayList<String> values = SummaryHelper.getDistinctYearMonth();
         selectorBox.setItems(FXCollections.observableArrayList(values));
@@ -128,7 +170,9 @@ public class MonthController extends SwitchController {
     private void updateSelectedMonth(){
         YearMonth ym = YearMonth.parse(selectorBox.getValue());
         monthNameLabel.setText(monthOf[ym.getMonthValue()-1]);
+        monthNameLabel2.setText(monthOf[ym.getMonthValue()-1]);
         yearLabel.setText(String.valueOf(ym.getYear()));
+        yearLabel2.setText(String.valueOf(ym.getYear()));
     }
 
     private void updateSellUnit(){
@@ -156,9 +200,9 @@ public class MonthController extends SwitchController {
         int netTotal = income - (sale_cost + salary + rental);
         if(netTotal < 0){
             netTotalLabel.setText("ขาดทุนสุทธิ");
-            netTotalamount.setTextFill(Color.RED); // TODO ใส่สี css แทนนะ
+            netTotalamount.setTextFill(Color.RED);
         } else {
-            netTotalamount.setTextFill(Color.GREEN); // TODO ใส่สี css แทนนะ
+            netTotalamount.setTextFill(Color.GREEN);
         }
         formatLabelText(netTotalamount,netTotal);
     }

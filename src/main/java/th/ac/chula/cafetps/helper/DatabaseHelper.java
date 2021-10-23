@@ -1,5 +1,6 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.helper;
 
+import th.ac.chula.cafetps.constants.Constants;
 import th.ac.chula.cafetps.model.ItemRecord;
 import th.ac.chula.cafetps.model.Member;
 import th.ac.chula.cafetps.model.User;
@@ -17,7 +18,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 public class DatabaseHelper {
-    static Connection connect(){
+    public static Connection connect(){
         Connection connection = null;
         try{
             connection = DriverManager.getConnection(Constants.DATABASE_NAME);

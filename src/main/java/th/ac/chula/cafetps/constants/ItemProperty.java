@@ -1,4 +1,4 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.constants;
 
 public enum ItemProperty {
     HOT("ร้อน"),

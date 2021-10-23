@@ -40,7 +40,10 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Label fx:id="memberName" layoutX="1269.0" layoutY="40.0" />
+                  <Label fx:id="memberName" layoutX="1250.0" layoutY="32.0" styleClass="member-name" text="ลูกค้า">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                </children>
             </Pane>
          </top>
@@ -49,7 +52,7 @@
                <content>
                   <VBox fillWidth="false" prefWidth="919.0" spacing="24.0" styleClass="menu-box">
                      <children>
-                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
+                        <VBox fx:id="recentBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="856.0" spacing="16.0" styleClass="menu-box">
                            <children>
                               <Label fx:id="name3" styleClass="label-category" text="Recent Order" />
                               <GridPane fx:id="recentGrid">
@@ -101,24 +104,36 @@
             </ScrollPane>
          </right>
          <left>
-            <ScrollPane hbarPolicy="NEVER" hmax="0.0" maxWidth="455.0" prefHeight="872.0" vbarPolicy="NEVER" BorderPane.alignment="TOP_LEFT">
-               <BorderPane.margin>
-                  <Insets left="16.0" right="24.0" top="55.0" />
-               </BorderPane.margin>
-               <content>
+            <Pane prefHeight="872.0" prefWidth="455.0" BorderPane.alignment="CENTER">
+               <children>
                   <TableView fx:id="receiptTable" maxWidth="455.0" minHeight="800.0" prefHeight="200.0" styleClass="choice-box" stylesheets="@stylesheet.css">
-                    <columns>
-                      <TableColumn fx:id="nameItemCol" minWidth="128.0" text="รายการ" />
+                     <columns>
+                        <TableColumn fx:id="nameItemCol" minWidth="128.0" text="รายการ" />
                         <TableColumn fx:id="sweetnessCol" minWidth="114.0" text="ความหวาน" />
-                      <TableColumn fx:id="quantityCol" minWidth="60.0" text="จำนวน" />
-                       <TableColumn fx:id="priceCol" minWidth="48.0" text="ราคา" />
-                       <TableColumn fx:id="editCol" minWidth="24.0" />
-                    </columns>
+                        <TableColumn fx:id="quantityCol" minWidth="60.0" text="จำนวน" />
+                        <TableColumn fx:id="priceCol" minWidth="48.0" text="ราคา" />
+                        <TableColumn fx:id="editCol" minWidth="24.0" />
+                     </columns>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </TableView>
-               </content>
-            </ScrollPane>
+               </children>
+               <opaqueInsets>
+                  <Insets left="24.0" top="55.0" />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets left="16.0" top="55.0" />
+               </BorderPane.margin>
+            </Pane>
          </left>
       </BorderPane>
-      <Button layoutX="16.0" layoutY="915.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="455.0" styleClass="submit-button" stylesheets="@stylesheet.css" text="ยืนยันรายการ" textFill="WHITE" />
+      <AnchorPane layoutX="17.0" layoutY="858.0" prefHeight="57.0" prefWidth="453.0" styleClass="total" stylesheets="@stylesheet.css">
+         <children>
+            <Label layoutX="33.0" layoutY="8.0" text="ยอดรวม" />
+            <Label fx:id="totalPrice" layoutX="382.0" layoutY="8.0" text="0" />
+         </children>
+      </AnchorPane>
+      <Button layoutX="16.0" layoutY="915.0" mnemonicParsing="false" onAction="#submitOrder" prefHeight="108.0" prefWidth="455.0" styleClass="submit-button" stylesheets="@stylesheet.css" text="ยืนยันรายการ" textFill="WHITE" />
    </children>
 </AnchorPane>

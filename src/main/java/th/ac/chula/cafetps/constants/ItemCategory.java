@@ -1,4 +1,4 @@
-package th.ac.chula.cafetps;
+package th.ac.chula.cafetps.constants;
 
 public enum ItemCategory {
     COFFEE("Coffee"),
